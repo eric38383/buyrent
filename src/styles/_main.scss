@@ -1,0 +1,113 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+body {
+    font-family: $font;
+    font-weight: 300;
+    margin: 0;
+}
+
+h1 {
+    font-size: .85em;
+    font-weight: 600;
+    margin: 0;
+}
+
+p {
+    font-size: .8em;
+}
+
+.container {
+    margin: 50px auto 0px auto;
+    padding: 15px;
+}
+
+section {
+    margin-top: 50px;
+}
+
+@media (min-width: 768px) { 
+    .container {
+        max-width: 720px;
+        padding: 0;
+    }
+}
+
+@media (min-width: 992px) { 
+    .container {
+        max-width: 960px;
+        padding: 0;
+    }
+}
+
+@media (min-width: 1200px) { 
+    .container {
+        max-width: 1140px;
+        padding: 0;
+    }
+}
+
+.input, .select {
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #dadada;
+    border-radius: 2px;
+    color: #000;
+    cursor: text;
+    font-size: 14px;
+    line-height: 1.3em;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    width: 100%;
+    &:focus {
+        outline: 1px solid black;
+    }
+}
+
+label {
+    font-size: .9em;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button,
+select {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.form-section {
+    display: flex;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.form-section:first-child {
+    border-top: 1px solid grey;
+}
+
+.form-section .form-inner:first-child {
+    background: rgb(250, 250, 250);
+    border-right: 1px solid grey;
+}
+
+.form-inner {
+    padding: 15px;
+    width: 50%;
+}
+
+.form-error {
+    font-size: 0.75em;
+    color: darkred;
+    margin-top: -15px;
+}
+
+.form-input-error {
+    border: 1px solid darkred;
+}
