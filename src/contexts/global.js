@@ -1,11 +1,12 @@
 import React, { createContext, useReducer } from 'react';
-import { RentReducer, PropertyReducer, LoanReducer } from '../reducers';
-import { Rent, Property, Loan } from '../utilities';
+import { RentReducer, PropertyReducer, LoanReducer, InvestmentReducer } from '../reducers';
+import { Rent, Property, Loan, Investment } from '../utilities';
 
 const initialState = {
     rent: Rent(),
     property: Property({ price: ''}),
-    loan: Loan()
+    loan: Loan(),
+    investment: Investment()
 }
 
 const combineReducers = reducers => {
@@ -27,7 +28,8 @@ const Store = ({ children }) => {
     const [state, dispatch] = combineReducers({
         rent: useReducer(RentReducer, initialState.rent),
         property: useReducer(PropertyReducer, initialState.property),
-        loan: useReducer(LoanReducer, initialState.loan)
+        loan: useReducer(LoanReducer, initialState.loan),
+        investment: useReducer(InvestmentReducer, initialState.investment)
     })
 
     return (

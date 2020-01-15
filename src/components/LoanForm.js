@@ -2,32 +2,26 @@ import React, { useContext, useEffect } from 'react';
 import { Global } from '../contexts/global';
 import useInputStateNumber from '../hooks/useInputStateNumber';
 
-
-const LoanForm = () => {
+const DownPayment = () => {
     const [state, dispatch] = useContext(Global);
-    const { loan } = state;
-    const [downPayment, setDownPayment, downPaymentTouched, downPaymentError, setDownPaymentError] = useInputStateNumber(loan.downPayment);
-    const [term, setTerm, termTouched, termError, setTermError] = useInputStateNumber(loan.term);
-    const [rate, setRate, rateTouched, rateError, setRateError] = useInputStateNumber(loan.rate);
-    const [closingCosts, setClosingCosts, closingCostsTouched, closingCostsError, setClosingCostsError] = useInputStateNumber(loan.closingCosts);
-    const [moMI, setMoMI, moMITouched, moMIError, setMoMIError] = useInputStateNumber(loan.moMI);
+    const { loan, property } = state;
+    const [downPayment, setDownPayment, downPaymentTouched, downPaymentError, setDownPaymentError, handleDownPaymentBlur] = useInputStateNumber(loan.downPayment);
+    
+    useEffect(() => {
+        const loan = {
+            downPayment: downPayment,
+        };
 
-    const handleBlur = (e, num, touched, setError) => {
-        if(!num && !touched) {
-            setError('Required')
+        dispatch({ type: "SET_LOAN_FIELD", payload: loan });
+    },  [downPayment]);
+
+    const handleBlur = (e) => {
+        handleDownPaymentBlur(e);
+        if(!loan.closingCosts && property.price) {
+            const cc = { closingCosts: Math.round(loan.estimatedClosingCosts(property.price)) }
+            dispatch({ type: "SET_LOAN_FIELD", payload: cc });
         }
     }
-
-    useEffect(() => {
-        const loanObj = {
-            downPayment: downPayment,
-            term: term,
-            rate: rate,
-            closingCosts: closingCosts,
-            moMI: moMI
-        };
-        dispatch({ type: "SET_LOAN_FIELD", payload: loanObj });
-    },  [downPayment, term, rate, closingCosts, moMI]);
 
     return (
         <>
@@ -36,16 +30,42 @@ const LoanForm = () => {
                 type='number'
                 className={`input ${downPaymentError ? 'form-input-error' : ''}`}
                 onChange={(e) => setDownPayment(e.target.value)}
-                onBlur={(e) => handleBlur(e, downPayment, downPaymentTouched, setDownPaymentError)}
-                value={loan.downPayment}
+                onBlur={(e) => handleBlur(e)}
+                value={downPayment}
             />
             {downPaymentError ? <div className='form-error'>{downPaymentError}</div> : null}
+        </>
+    )
+}
+
+
+const LoanForm = () => {
+    const [state, dispatch] = useContext(Global);
+    const { loan } = state;
+    const [term, setTerm, termTouched, termError, setTermError, handleTermBlur] = useInputStateNumber(loan.term);
+    const [rate, setRate, rateTouched, rateError, setRateError, handleRateBlur] = useInputStateNumber(loan.rate);
+    const [closingCosts, setClosingCosts, closingCostsTouched, closingCostsError, setClosingCostsError, handleClosingBlur] = useInputStateNumber(loan.closingCosts);
+    const [moMI, setMoMI, moMITouched, moMIError, setMoMIError, handleMIBlur] = useInputStateNumber(loan.moMI);
+
+    useEffect(() => {
+        const loanObj = {
+            term: term,
+            rate: rate,
+            closingCosts: closingCosts,
+            moMI: moMI
+        };
+        dispatch({ type: "SET_LOAN_FIELD", payload: loanObj });
+    },  [term, rate, closingCosts, moMI]);
+
+    return (
+        <>
+            <DownPayment />
             <label>Term</label>
             <select
                 className='select'
                 onChange={(e) => setTerm(e.target.value)}
-                onBlur={(e) => handleBlur(e, term, termTouched, setTermError)}
-                value={loan.term}
+                onBlur={(e) => handleTermBlur()}
+                value={term}
             >
                 <option value={10}>10 yrs</option>
                 <option value={15}>15 yrs</option>
@@ -59,8 +79,7 @@ const LoanForm = () => {
                 type='number'
                 className={`input ${rateError ? 'form-input-error' : ''}`}
                 onChange={(e) => setRate(e.target.value)}
-                onBlur={(e) => handleBlur(e, rate, rateTouched, setRateError)}
-                value={loan.rate}
+                value={rate}
             />
             {rateError ? <div className='form-error'>{rateError}</div> : null}
             <label>Closing Costs</label>
@@ -68,8 +87,8 @@ const LoanForm = () => {
                 type='number'
                 className={`input ${closingCostsError ? 'form-input-error' : ''}`}
                 onChange={(e) => setClosingCosts(e.target.value)}
-                onBlur={(e) => handleBlur(e, closingCosts, closingCostsTouched, setClosingCostsError)}
-                value={loan.closingCosts}
+                onBlur={(e) => handleClosingBlur(e)}
+                value={closingCosts}
             />
             {closingCostsError ? <div className='form-error'>{closingCostsError}</div> : null}
             <label>Monthly Mortgage Insurance</label>
@@ -77,8 +96,8 @@ const LoanForm = () => {
                 type='number'
                 className={`input ${moMIError ? 'form-input-error' : ''}`}
                 onChange={(e) => setMoMI(e.target.value)}
-                onBlur={(e) => handleBlur(e, moMI, moMITouched, setMoMIError)}
-                value={loan.moMI}
+                onBlur={(e) => handleMIBlur(e)}
+                value={moMI}
             />
             {moMIError ? <div className='form-error'>{moMIError}</div> : null}
         </>

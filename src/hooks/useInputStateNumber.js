@@ -9,15 +9,15 @@ function useInputStateNumber(initialValue='') {
         let checkVal = parseFloat(val);
         if(!touched) {
             setTouched(true);
-            setNumber(checkVal.toString());
+            setNumber(checkVal);
         } else {
             if (!checkVal) {
                 let set = checkVal !== 0 ? val : checkVal;
                 setError('Required');
-                setNumber(set.toString());
+                setNumber(set);
             } else {
                 setError('');
-                setNumber(checkVal.toString());
+                setNumber(checkVal);
             }
         }
     }

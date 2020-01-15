@@ -4,7 +4,8 @@ const loanProto = {
         return this.rate / 100;
     },
     estimatedClosingCosts: function (price) {
-        return price * 0.06;
+        const amount = this.loanAmount(price)
+        return amount * 0.06;
     },
     loanAmount: function (price) {
         return price - this.downPayment;

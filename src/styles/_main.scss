@@ -18,7 +18,7 @@ h1 {
 }
 
 p {
-    font-size: .8em;
+    font-size: .9em;
 }
 
 .container {
@@ -69,6 +69,7 @@ section {
 }
 
 label {
+    display: block;
     font-size: .9em;
 }
 
@@ -83,6 +84,7 @@ select {
 
 .form-section {
     display: flex;
+    flex-wrap: wrap;
     border-left: 1px solid grey;
     border-right: 1px solid grey;
     border-bottom: 1px solid grey;
@@ -98,8 +100,24 @@ select {
 }
 
 .form-inner {
+    width: 100%;
     padding: 15px;
-    width: 50%;
+}
+
+@media (min-width: 568px) {
+    .form-inner {
+        width: 50%;
+    }
+}
+
+.form-inner-title {
+    font-size: .75em;
+    font-weight: 700;
+}
+
+.form-inner-content {
+    font-size: .8em;
+    margin-bottom: 15px;
 }
 
 .form-error {
@@ -111,3 +129,35 @@ select {
 .form-input-error {
     border: 1px solid darkred;
 }
+
+.range {
+    display: inline-block;
+    background: black;
+    margin: 25px 0px 15px 0px;
+    width: 100%;
+  }
+  
+  input[type=range] {
+    -webkit-appearance: none;
+    position: relative
+  }
+  
+  input[type=range]::-webkit-slider-runnable-track {
+    height: 2px;
+    border: none;
+    border-radius: 3px
+  }
+  
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 15px;
+    width: 15px;
+    border-radius: 510%;
+    background: #141414;
+    border: 2px solid #515151;
+    margin-top: -5px;
+    cursor: pointer
+  }
+  
+  
