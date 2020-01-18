@@ -6,7 +6,7 @@ const rentProto = {
         return compoundInterest(this.monthlyRent, this.avgRentIncrease, yrs);
     },
     forecastedRentPerYear: function (yrs) {
-        return range(0, yrs).map(yr => this.forcastedRent(yr));
+        return range(0, yrs).map(yr => this.forcastedRent(yr) * 12);
     },
     forecastedRunningTotal: function (yrs) {
         const perYear = this.forecastedRentPerYear(yrs);

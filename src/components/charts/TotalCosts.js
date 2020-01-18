@@ -4,46 +4,53 @@ import {
     XAxis, 
     YAxis, 
     HorizontalGridLines, 
-    LineSeries,
-    VerticalGridLines
+    VerticalGridLines,
+    LineSeries
 } from 'react-vis';
 
-const TotalCostsChart = ({ width, height, data }) => {
-    const format = data.map((d, i) => {
-        return [i, d];
-    })
+const TotalCostsChart = ({ rentCosts, propertyCosts, colors }) => {
+    const rentFormatted = rentCosts.map((d, i) => [i, d]);
+    const propFormatted = propertyCosts.map((d, i) => [i, d]);
+
     return (
         <FlexibleXYPlot
-        width={700}
-        height={300}
-        margin={{
-            left: 70,
-            right: 30,
-            top: 30,
-            bottom: 30
-        }}
-        getX={(d) => d[0]}
-        getY={(d) => d[1]}>
+            margin={{
+                left: 70,
+                right: 30,
+                top: 30,
+                bottom: 30
+            }}
+            getX={(d) => d[0]}
+            getY={(d) => d[1]}>
+
             <VerticalGridLines />
             <HorizontalGridLines />
+
             <LineSeries
-                color="red"
-                strokeWidth={3}
-                data={format}
+                color={colors[0]}
+                strokeWidth={2}
+                data={rentFormatted}
+            />
+             <LineSeries
+                color={colors[1]}
+                strokeWidth={2}
+                data={propFormatted}
             />
             <XAxis 
-              tickFormat={v => parseInt(v)}
+              title={"Year"}
+              tickTotal={8}
               style={{
                 line: {stroke: 'lightgrey'},
                 ticks: {stroke: 'lightgrey'},
-                text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600}
+                text: {stroke: 'none', fill: '#6b6b76'}
             }}
             />
             <YAxis 
+              title={"Total Costs"}
               style={{
                 line: {stroke: 'lightgrey'},
                 ticks: {stroke: 'lightgrey'},
-                text: {stroke: 'none', fill: '#6b6b76', fontWeight: 600}
+                text: {stroke: 'none', fill: '#6b6b76'}
                 }}
             />
         </FlexibleXYPlot>

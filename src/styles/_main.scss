@@ -6,6 +6,7 @@ a {
     text-decoration: none;
 }
 body {
+    color: $black;
     font-family: $font;
     font-weight: 300;
     margin: 0;
@@ -21,143 +22,81 @@ p {
     font-size: .9em;
 }
 
+section {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
 .container {
     margin: 50px auto 0px auto;
     padding: 15px;
 }
 
-section {
-    margin-top: 50px;
-}
-
-@media (min-width: 768px) { 
+@media (min-width: $tablet) { 
     .container {
         max-width: 720px;
         padding: 0;
     }
 }
 
-@media (min-width: 992px) { 
+@media (min-width: $laptop) { 
     .container {
         max-width: 960px;
         padding: 0;
     }
 }
 
-@media (min-width: 1200px) { 
+@media (min-width: $desktop) { 
     .container {
         max-width: 1140px;
         padding: 0;
     }
 }
 
-.input, .select {
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #dadada;
-    border-radius: 2px;
-    color: #000;
-    cursor: text;
-    font-size: 14px;
-    line-height: 1.3em;
-    margin-bottom: 15px;
-    padding: 10px 15px;
-    width: 100%;
-    &:focus {
-        outline: 1px solid black;
-    }
-}
 
-label {
-    display: block;
-    font-size: .9em;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button,
-select {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-}
-
-.form-section {
+.row {
     display: flex;
     flex-wrap: wrap;
-    border-left: 1px solid grey;
-    border-right: 1px solid grey;
-    border-bottom: 1px solid grey;
 }
 
-.form-section:first-child {
-    border-top: 1px solid grey;
+.col {
+    padding: 10px;
 }
 
-.form-section .form-inner:first-child {
-    background: rgb(250, 250, 250);
-    border-right: 1px solid grey;
-}
-
-.form-inner {
+.is-half {
     width: 100%;
-    padding: 15px;
 }
 
-@media (min-width: 568px) {
-    .form-inner {
+@media(min-width: $tablet) {
+    .is-half {
         width: 50%;
     }
 }
 
-.form-inner-title {
-    font-size: .75em;
-    font-weight: 700;
-}
-
-.form-inner-content {
-    font-size: .8em;
-    margin-bottom: 15px;
-}
-
-.form-error {
-    font-size: 0.75em;
-    color: darkred;
-    margin-top: -15px;
-}
-
-.form-input-error {
-    border: 1px solid darkred;
-}
-
-.range {
-    display: inline-block;
-    background: black;
-    margin: 25px 0px 15px 0px;
+.full-width {
     width: 100%;
-  }
-  
-  input[type=range] {
-    -webkit-appearance: none;
-    position: relative
-  }
-  
-  input[type=range]::-webkit-slider-runnable-track {
-    height: 2px;
-    border: none;
-    border-radius: 3px
-  }
-  
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    border: none;
-    height: 15px;
-    width: 15px;
-    border-radius: 510%;
-    background: #141414;
-    border: 2px solid #515151;
-    margin-top: -5px;
-    cursor: pointer
-  }
-  
-  
+}
+
+.split {
+    justify-content: space-between;
+}
+
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.is-small {
+    font-size: .85em;
+}
+
+.bottom-line {
+    font-size: 1.2em;
+}

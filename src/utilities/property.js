@@ -30,6 +30,19 @@ const propertyProto = {
         return range(0, yrs).map(yr => this.propTaxAtYear(yr));
     },
 
+    totalCosts: function (loanPayment, yrs) {
+        const totals = [];
+        for(let i = 0; i <= yrs; i++) {
+            const propertyTax = compoundInterest(this.propTaxAtYear(0), this.avgAppreciationRate, i);
+            const insurance = compoundInterest(this.moHomeInsur, this.avgAppreciationRate, i) * 12;
+            const fees = compoundInterest(this.moAssocFee, this.avgAppreciationRate, i) * 12;
+            const repairs = compoundInterest(this.moMaintenance, this.avgAppreciationRate, i) * 12;
+            const total = (loanPayment * 12) + propertyTax + insurance + fees + repairs;
+            totals.push(total);
+        }
+        return totals;
+    }
+
 }
 
 const propObj = {
@@ -37,7 +50,7 @@ const propObj = {
     propTaxRate: 1.3,
     moHomeInsur: 100,
     moAssocFee: 100,
-    moMaintenance: 500,
+    moMaintenance: 300,
 }
 
 const Property = (obj=propObj) => {

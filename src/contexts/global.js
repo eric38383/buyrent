@@ -4,9 +4,10 @@ import { Rent, Property, Loan, Investment } from '../utilities';
 
 const initialState = {
     rent: Rent(),
-    property: Property({ price: ''}),
+    property: Property(),
     loan: Loan(),
-    investment: Investment()
+    investment: Investment(),
+    colors: ['rgb(37, 38, 49)', 'rgb(49, 86, 89)']
 }
 
 const combineReducers = reducers => {
@@ -29,7 +30,7 @@ const Store = ({ children }) => {
         rent: useReducer(RentReducer, initialState.rent),
         property: useReducer(PropertyReducer, initialState.property),
         loan: useReducer(LoanReducer, initialState.loan),
-        investment: useReducer(InvestmentReducer, initialState.investment)
+        investment: useReducer(InvestmentReducer, initialState.investment),
     })
 
     return (

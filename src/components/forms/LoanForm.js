@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import { Global } from '../contexts/global';
-import useInputStateNumber from '../hooks/useInputStateNumber';
+import { Global } from '../../contexts/global';
+import useInputStateNumber from '../../hooks/useInputStateNumber';
 
 const DownPayment = () => {
     const [state, dispatch] = useContext(Global);
     const { loan, property } = state;
-    const [downPayment, setDownPayment, downPaymentTouched, downPaymentError, setDownPaymentError, handleDownPaymentBlur] = useInputStateNumber(loan.downPayment);
+    const [downPayment, setDownPayment, downPaymentTouched, downPaymentError, setDownPaymentError, handleDownPaymentBlur] = useInputStateNumber(loan.downPayment, false);
     
     useEffect(() => {
         const loan = {
@@ -44,8 +44,8 @@ const LoanForm = () => {
     const { loan } = state;
     const [term, setTerm, termTouched, termError, setTermError, handleTermBlur] = useInputStateNumber(loan.term);
     const [rate, setRate, rateTouched, rateError, setRateError, handleRateBlur] = useInputStateNumber(loan.rate);
-    const [closingCosts, setClosingCosts, closingCostsTouched, closingCostsError, setClosingCostsError, handleClosingBlur] = useInputStateNumber(loan.closingCosts);
-    const [moMI, setMoMI, moMITouched, moMIError, setMoMIError, handleMIBlur] = useInputStateNumber(loan.moMI);
+    const [closingCosts, setClosingCosts, closingCostsTouched, closingCostsError, setClosingCostsError, handleClosingBlur] = useInputStateNumber(loan.closingCosts, false);
+    const [moMI, setMoMI, moMITouched, moMIError, setMoMIError, handleMIBlur] = useInputStateNumber(loan.moMI, false);
 
     useEffect(() => {
         const loanObj = {

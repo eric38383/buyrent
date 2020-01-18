@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { Global } from '../contexts/global';
-import useInputStateNumber from '../hooks/useInputStateNumber';
+import { Global } from '../../contexts/global';
+import useInputStateNumber from '../../hooks/useInputStateNumber';
 
 const RentForm = () => {
     const [state, dispatch] = useContext(Global);

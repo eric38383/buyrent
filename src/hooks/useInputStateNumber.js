@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function useInputStateNumber(initialValue='') {
+function useInputStateNumber(initialValue='', requireZero=true) {
     let [number, setNumber] = useState(initialValue);
     let [touched, setTouched] = useState(false);
     let [error, setError] = useState('');
@@ -13,8 +13,13 @@ function useInputStateNumber(initialValue='') {
         } else {
             if (!checkVal) {
                 let set = checkVal !== 0 ? val : checkVal;
-                setError('Required');
-                setNumber(set);
+                console.log(requireZero)
+                if(requireZero) {
+                    setError('Required');
+                    setNumber(set);
+                }  else {
+                    setNumber(set);
+                }
             } else {
                 setError('');
                 setNumber(checkVal);

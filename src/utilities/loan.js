@@ -48,11 +48,11 @@ const loanProto = {
 }
 
 const loanObj = {
-    rate:  '',
+    rate:  4.5,
     term: 30,
-    downPayment: '',
-    closingCosts: '',
-    moMI: ''
+    downPayment: 100000,
+    closingCosts: 12000,
+    moMI: 100
 }
 
 const Loan = (obj=loanObj) => {

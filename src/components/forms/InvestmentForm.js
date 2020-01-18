@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Global } from '../contexts/global';
+import { Global } from '../../contexts/global';
 
 const InvestmentForm = () => {
     const [state, dispatch] = useContext(Global);

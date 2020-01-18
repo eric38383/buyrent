@@ -30,9 +30,9 @@ export const futureValueOfSeries = (investment, rate, years, compoundPerYear = 1
 
 /**
  * @function
- * @param {int} first - 
- * @param {float} last -
- * @description - 
+ * @param {int} first - lower num
+ * @param {float} last - higher num
+ * @description - create an array from first number to last number
  * @returns {array}
  */
 export const range = (first, last) => {
@@ -45,8 +45,8 @@ export const range = (first, last) => {
 
 /**
  * @function
- * @param {int} number - 
- * @description - 
+ * @param {int} val - separates number with commas 
+ * @description - doesn't work with floats
  * @returns {array}
  */
 export const commaSeparateNumber = (val) => {
@@ -54,4 +54,13 @@ export const commaSeparateNumber = (val) => {
         val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
     }
     return val;
+}
+
+/**
+ * @function
+ * @param {int} val
+ * @returns {string} formatting money with commas 
+ */
+export const moneyFormat = (val) => {
+    return '$' + commaSeparateNumber(Math.round(val));
 }
