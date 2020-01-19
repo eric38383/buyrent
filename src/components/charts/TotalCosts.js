@@ -9,8 +9,8 @@ import {
 } from 'react-vis';
 
 const TotalCostsChart = ({ rentCosts, propertyCosts, colors }) => {
-    const rentFormatted = rentCosts.map((d, i) => [i, d]);
-    const propFormatted = propertyCosts.map((d, i) => [i, d]);
+    const rentFormatted = rentCosts.map((d, i) => [i + 1, d]);
+    const propFormatted = propertyCosts.map((d, i) => [i + 1, d]);
 
     return (
         <FlexibleXYPlot

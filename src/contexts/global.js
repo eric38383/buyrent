@@ -1,13 +1,12 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 import { RentReducer, PropertyReducer, LoanReducer, InvestmentReducer } from '../reducers';
 import { Rent, Property, Loan, Investment } from '../utilities';
 
-const initialState = {
+const initialState = window.g = {
     rent: Rent(),
     property: Property(),
     loan: Loan(),
     investment: Investment(),
-    colors: ['rgb(37, 38, 49)', 'rgb(49, 86, 89)']
 }
 
 const combineReducers = reducers => {

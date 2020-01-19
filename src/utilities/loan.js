@@ -1,39 +1,43 @@
-const loanProto = {
+export const loanFuncs = {
     paymentsPerYear: 12,
-    formatRate: function () {
-        return this.rate / 100;
+    downPayment: function(loan,price) {
+        return price * (loan.downPaymentPer / 100)
     },
-    estimatedClosingCosts: function (price) {
-        const amount = this.loanAmount(price)
+    formatRate: function (loan) {
+        return loan.rate / 100;
+    },
+    estimatedClosingCosts: function (loan, price) {
+        const amount = this.loanAmount(loan, price)
         return amount * 0.06;
     },
-    loanAmount: function (price) {
-        return price - this.downPayment;
+    loanAmount: function (loan, price) {
+        return price * ((100 - loan.downPaymentPer) / 100)
     },
-    LTV: function (price) {
-        return (this.downPayment / price) * 100;
+    LTV: function (loan, price) {
+        return (this.loanAmount(loan) / price);
     },
-    calculateMonthlyPayment: function (price) {
-        const amount = this.loanAmount(price);
-        const totalMonths = this.term * this.paymentsPerYear;
-        const monthlyRate = this.rate / 100 / this.paymentsPerYear;
+    calculateMonthlyPayment: function (loan, price) {
+        const amount = this.loanAmount(loan, price);
+        const totalMonths = loan.term * this.paymentsPerYear;
+        const monthlyRate = loan.rate / 100 / this.paymentsPerYear;
         return (amount * (monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / (Math.pow(1 + monthlyRate, totalMonths) - 1)) || 0;
     },
-    amortizationSchedule: function (price) {
-        const amount = this.loanAmount(price); 
-        const totalMonths = this.term * this.paymentsPerYear;
-        const monthlyRate = (this.rate / 100) / this.paymentsPerYear;
-        const monthlyPayment = this.calculateMonthlyPayment(price);
+    amortizationSchedule: function (loan, price) {
+        const amount = this.loanAmount(loan, price); 
+        const totalMonths = loan.term * this.paymentsPerYear;
+        const monthlyRate = (loan.rate / 100) / this.paymentsPerYear;
+        const monthlyPayment = this.calculateMonthlyPayment(loan, price);
         const amorArray = [];
         let currentBalance = amount;
     
         for (var i = 0; i < totalMonths; i++) {
             const interest = currentBalance * monthlyRate;
+            const calcMI = currentBalance / amount < .78 ? 0 : loan.moMI
             let principal = monthlyPayment - interest;
             principal = currentBalance < principal ? currentBalance : principal;
             currentBalance = currentBalance - principal;
             const obj = {
-                payment: principal + interest,
+                payment: principal + interest + calcMI,
                 principal: principal,
                 interest: interest,
                 balance: currentBalance,
@@ -48,15 +52,16 @@ const loanProto = {
 }
 
 const loanObj = {
-    rate:  4.5,
+    rate: 3.84,
     term: 30,
-    downPayment: 100000,
-    closingCosts: 12000,
-    moMI: 100
+    downPaymentPer: 10,
+    closingCosts: '',
+    moMI: '',
+    hasError: false
 }
 
 const Loan = (obj=loanObj) => {
-    return Object.assign(Object.create(loanProto), obj);
+    return Object.assign({}, obj);
 }
 
 

@@ -9,20 +9,19 @@ const ColorButton = ({ colors, handleClick }) => {
     }
 
     return (
-        <button style={{
-            'height': '20px', 
-            'width': '20px', 
-            'box-shadow': '1px 1px 5px',
-            'border': 'none',
-            'cursor': 'pointer',
-            'background': `linear-gradient(to bottom right, ${colors[0]} 50%, ${colors[1]} 50%)`
-            }}
-            onKeyPress={handleKeyPress}
-            onClick={(e) => handleClick(e, colors)}
-        >
-
-        </button>
-    )
+      <button
+        style={{
+          height: "20px",
+          width: "20px",
+          boxShadow: "1px 1px 5px",
+          border: "none",
+          cursor: "pointer",
+          background: `linear-gradient(to bottom right, ${colors[0]} 50%, ${colors[1]} 50%)`
+        }}
+        onKeyPress={handleKeyPress}
+        onClick={() => handleClick(colors)}
+      ></button>
+    );
 }
 
 export default ColorButton;

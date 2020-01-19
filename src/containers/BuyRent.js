@@ -5,7 +5,6 @@ import { InvestmentContent, RentContent, PropertyContent, LoanContent } from '..
 import BvrResults from '../components/BvrResults';
 import ColorButton from '../components/ColorButton';
 
-
 const Themes =[
     ['rgb(164, 180, 148)', 'rgb(190, 197, 173)'],
     ['rgb(234, 90, 87)', 'rgb(248, 220, 101)'],
@@ -16,36 +15,78 @@ const Themes =[
 ]
 
 const BuyRent = () => {
-    const [colors, setColors] = useState(Themes[0]);
-    const [state, dispatch] = useContext(Global);
-    const { rent, property, loan, investment } = state;
+  const [colors, setColors] = useState(Themes[5]);
+  const [showCharts, setShowCharts] = useState(false);
+  const [touched, setTouched] = useState(false);
+  const [state, dispatch] = useContext(Global);
+  const { rent, property, loan, investment } = state;
+  const hasError =
+    rent.hasError || loan.hasError || property.hasError || investment.hasError;
 
-    const handleClick = (e, colors) => {
-        setColors(colors);
+  const handleClick = (colors) => {
+    setColors(colors);
+  };
+
+  const handleShowCharts = () => {
+    if(!touched && !showCharts && hasError) {
+      setTouched(true)
+      return false;
     }
-    
-    return (
-      <div>
-        <Header />
-        <section>
-          <RentContent />
-          <PropertyContent />
-          <LoanContent />
-          <InvestmentContent colors={colors} />
-          <div className="row form-section">
-            <div className="form-inner">
-                <div>Themes</div>
-                <div className='row'>
-                    {Themes.map(item => {
-                        return <div className='col'><ColorButton colors={item} handleClick={handleClick} /></div>
-                    })}
-                </div>
-            </div>
-            <div className="form-inner">
-              <button type="button" className='button-dark right'>Calculate</button>
+
+    if(!showCharts && hasError) {
+      return false;
+    }
+
+    if(!touched) {
+      setTouched(true);
+    }
+    setShowCharts(true);
+  };
+
+
+  return (
+    <div>
+      <Header />
+      <section>
+        <RentContent />
+        <PropertyContent />
+        <LoanContent />
+        <InvestmentContent colors={colors} />
+        <div className="row form-section">
+          <div className="form-inner">
+            <div>Themes</div>
+            <div className="row">
+              {Themes.map(item => {
+                return (
+                  <div key={item} className="col">
+                    <ColorButton 
+                      colors={item} 
+                      handleClick={handleClick} 
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
-        </section>
+          <div className="form-inner">
+            <div>
+              <button
+                type="button"
+                className="button-dark right"
+                onClick={() => handleShowCharts()}
+              >
+                Show Results
+              </button>
+            </div>
+            {hasError && touched ? (
+              <div className="bold form-error" style={{ marginTop: "15px" }}>
+                Please fill out required fields.
+              </div>
+            ) : null}
+          </div>
+        </div>
+      </section>
+      {showCharts ? (
         <BvrResults
           rent={rent}
           property={property}
@@ -53,8 +94,9 @@ const BuyRent = () => {
           investment={investment}
           colors={colors}
         />
-      </div>
-    );
-}
+      ) : null}
+    </div>
+  );
+};
 
 export default BuyRent;

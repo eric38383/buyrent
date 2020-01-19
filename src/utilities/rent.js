@@ -1,15 +1,15 @@
 import { compoundInterest, range } from './helpers';
 
-const rentProto = {
+export const rentFuncs = {
     avgRentIncrease: 3.7,
-    forcastedRent: function (yrs) {
-        return compoundInterest(this.monthlyRent, this.avgRentIncrease, yrs);
+    forcastedRent: function (rent, yrs) {
+        return compoundInterest(rent.monthlyRent, this.avgRentIncrease, yrs);
     },
-    forecastedRentPerYear: function (yrs) {
-        return range(0, yrs).map(yr => this.forcastedRent(yr) * 12);
+    forecastedRentPerYear: function (rent, yrs) {
+        return range(0, yrs).map(yr => this.forcastedRent(rent, yr) * 12);
     },
-    forecastedRunningTotal: function (yrs) {
-        const perYear = this.forecastedRentPerYear(yrs);
+    forecastedRunningTotal: function (rent, yrs) {
+        const perYear = this.forecastedRentPerYear(rent, yrs);
         let sum = 0;
         return perYear.map(item => {
             sum += item;
@@ -19,11 +19,12 @@ const rentProto = {
 }
 
 const rentObj = {
-    monthlyRent: 2000,
+    monthlyRent: '',
+    hasError: true
 }
 
 const Rent = (obj=rentObj) => {
-    return Object.assign(Object.create(rentProto), obj);
+    return Object.assign({}, obj);
 }
 
 export default Rent;

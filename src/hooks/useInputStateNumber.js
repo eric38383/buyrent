@@ -6,20 +6,22 @@ function useInputStateNumber(initialValue='', requireZero=true) {
     let [error, setError] = useState('');
     
     const numberValidate = (val) => {
+        console.log('onChange')
         let checkVal = parseFloat(val);
         if(!touched) {
             setTouched(true);
             setNumber(checkVal);
         } else {
-            if (!checkVal) {
-                let set = checkVal !== 0 ? val : checkVal;
-                console.log(requireZero)
+            if (isNaN(checkVal)) {
+                setError('Required');
+                setNumber(val); 
+            } else if(checkVal === 0) {
                 if(requireZero) {
                     setError('Required');
-                    setNumber(set);
-                }  else {
-                    setNumber(set);
+                } else {
+                    setError('');
                 }
+                setNumber(checkVal); 
             } else {
                 setError('');
                 setNumber(checkVal);

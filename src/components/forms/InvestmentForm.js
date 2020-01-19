@@ -16,11 +16,19 @@ const InvestmentForm = () => {
     }, [stock])
     
     return (
-        <>
-            <label>Ratio of Stocks Compared To Bonds</label>
-            <input value={stock} className='range' type='range' min='0' max="100" onChange={(e) => setStock(e.target.value)}></input>
-        </>
-    )
+      <>
+        <label>Ratio of Stocks Compared To Bonds</label>
+        <input
+          value={stock}
+          className="range"
+          type="range"
+          min="0"
+          max="100"
+          onChange={e => setStock(e.target.value)}
+        ></input>
+       
+      </>
+    );
 }
 
 export default InvestmentForm;

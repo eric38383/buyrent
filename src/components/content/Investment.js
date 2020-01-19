@@ -34,6 +34,14 @@ const InvestmentContent = ({ colors }) => {
               and have a larger part of his portfolio in stocks, while an older
               investor should lean towards safer assets.
             </div>
+            <div className="form-inner-title">Average Returns:</div>
+            <div className="form-inner-content">
+              <div>Bonds: {investment.bondReturns.toFixed(2)}%</div>
+              <div>Stocks: {investment.stockReturns}%</div>
+              <div>
+                Your Average Rate: {investment.averageReturn().toFixed(2)}%
+              </div>
+            </div>
           </div>
         </div>
       </div>
