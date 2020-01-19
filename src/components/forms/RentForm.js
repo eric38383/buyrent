@@ -21,8 +21,8 @@ const RentForm = () => {
         <InputNumber 
             label={'Monthly Rent'}
             error={rentError}
-            onChange={setRent}
-            onBlur={handleRentBlur}
+            handleChange={setRent}
+            handleBlur={handleRentBlur}
             value={monthlyRent}
         />
       </>

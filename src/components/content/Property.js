@@ -18,8 +18,8 @@ const PropertyContent = () => {
           <div className="form-inner-title">Property Tax Rate</div>
           <div className="form-inner-content">
             Your rate is usually subject to the city, township, county or state
-            that you're living. While your rate may never change, if you're
-            proeprty increases in value, you may see increased taxes.
+            that you're living in. While your rate may never change, if you're
+            property increases in value, you may see increased taxes.
           </div>
           <div className="form-inner-title">Home Insurance</div>
           <div className="form-inner-content">
@@ -28,10 +28,10 @@ const PropertyContent = () => {
           </div>
           <div className="form-inner-title">Maintenance & Repairs</div>
           <div className="form-inner-content">
-            Many homeowners underestimte these costs, since when renting they
-            often ignore issues that they would fix, if they owned the property.
-            Most experts say that you will spend about 1% of your property value
-            a year.
+            Many homeowners underestimte these costs, since when renting, they
+            often ignore issues that they would fix if they owned the property.
+            Most experts estimate that you will spend about 1% per year 
+            of your property value.
           </div>
           <div className="form-inner-title">Total Costs</div>
           <div className="form-inner-content">

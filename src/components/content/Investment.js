@@ -29,10 +29,10 @@ const InvestmentContent = ({ colors }) => {
           <div className="col is-half">
             <div className="form-inner-title">Investment Objectives</div>
             <div className="form-inner-content">
-              It is nomally said that an investor should have a 60/40 split
+              It is normally said that an investor should have a 60/40 split
               between stocks and bonds. A younger investor should take more risk
               and have a larger part of his portfolio in stocks, while an older
-              investor should lean towards safer assets.
+              investor should lean towards less risky assets.
             </div>
             <div className="form-inner-title">Average Returns:</div>
             <div className="form-inner-content">

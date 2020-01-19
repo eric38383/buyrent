@@ -31,43 +31,36 @@ const PropertyForm = () => {
           <InputNumber 
             label={"Price"}
             error={priceError}
-            onChange={setPrice}
-            onBlur={handlePriceBlur}
+            handleChange={setPrice}
+            handleBlur={handlePriceBlur}
             value={price}
         />
           <InputNumber 
             label={"Property Tax Rate"}
             error={propTaxRateError}
-            onChange={setPropTaxRate}
-            onBlur={handlePropTaxBlur}
+            handleChange={setPropTaxRate}
+            handleBlur={handlePropTaxBlur}
             value={propTaxRate}
-        />
-          <InputNumber 
-            label={"Price"}
-            error={priceError}
-            onChange={setPrice}
-            onBlur={handlePriceBlur}
-            value={price}
         />
           <InputNumber 
             label={"Monthly Home Insurance"}
             error={moHomeInsurError}
-            onChange={setMoHomeInsur}
-            onBlur={handleMoHomeInsurBlur}
+            handleChange={setMoHomeInsur}
+            handleBlur={handleMoHomeInsurBlur}
             value={moHomeInsur}
         />
           <InputNumber 
             label={"Monthly Association Fee"}
             error={moAssocFeeError}
-            onChange={setMoAssocFee}
-            onBlur={handleMoAssocFeeBlur}
+            handleChange={setMoAssocFee}
+            handleBlur={handleMoAssocFeeBlur}
             value={moAssocFee}
         />
           <InputNumber 
             label={"Monthly Maintenance & Repairs"}
             error={moMaintenanceError}
-            onChange={setMoMaintenanceFee}
-            onBlur={handleMoMaintenanceBlur}
+            handleChange={setMoMaintenanceFee}
+            handleBlur={handleMoMaintenanceBlur}
             value={moMaintenance}
         />
       </>

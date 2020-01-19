@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TotalCostsChart from './charts/TotalCosts';
 import SimpleTable from './SimpleTable';
 import InvestmentReturns from './charts/InvestmentReturns';
@@ -9,8 +9,9 @@ import { loanFuncs } from '../utilities/loan';
 import { propFuncs } from '../utilities/property';
 import { rentFuncs } from '../utilities/rent';
 import { DiscreteColorLegend } from 'react-vis';
+import PopoverInfo from './PopoverInfo';
 
-const shouldComponentNotUpdate = (prevProps, { rent, loan, property, investment}) => {
+const shouldComponentNotUpdate = ( prevProps, { rent, loan, property, investment }) => {
   return rent.hasError || loan.hasError || property.hasError || investment.hasError;
 }
 
@@ -26,8 +27,9 @@ const BvrResults = React.memo(({ rent, loan, property, investment, colors }) => 
     const investments = calcReturns(differences, loan.closingCosts, downPay, investment.averageReturn());
     const futureHomeValue = propFuncs.forecastedPrice(property, 8);
     const principalPaid = loanFuncs.loanAmount(loan, property.price) - amort[8 * 12].balance;
-    const homeEquity = principalPaid + (futureHomeValue - property.price); 
-    const costToSell = (-futureHomeValue * 0.06);
+    const appreciation = futureHomeValue - property.price;
+    const homeEquity = principalPaid + appreciation + downPay; 
+    const costToSell = (-futureHomeValue * .10);
     const netWorthProp = costToSell + homeEquity + totalPropSavings;
     const netWorthRent = investments[investments.length - 1];
     const netWorthDiff = netWorthRent - netWorthProp;
@@ -98,8 +100,30 @@ const BvrResults = React.memo(({ rent, loan, property, investment, colors }) => 
                 <u>Property</u>
               </div>
             </div>
-            <div className="row split">
-              <div>Estimated Home Equity</div>
+            <div className="row split v-center">
+              <div>
+                Estimated Home Equity{" "}
+                <PopoverInfo
+                  contentComponent={(
+                  <>
+                    <div className='row split'>
+                      <div>Down Payment</div>
+                      <div>{moneyFormat(downPay)}</div>
+                    </div>
+                    <div className='row split'>
+                      <div>Principal Paid After</div>
+                      <div>{moneyFormat(principalPaid)}</div>
+                    </div>
+                    <div className='row split'>
+                      <div>Home Appreciation</div>
+                      <div>{moneyFormat(appreciation)}</div>
+                    </div>
+                  </>
+                  )}
+                  title={"Home Equity Breakdown at Year 8"}
+                />
+                
+              </div>
               <div className="bold">{moneyFormat(homeEquity)}</div>
             </div>
             <div className="row split">
@@ -108,9 +132,15 @@ const BvrResults = React.memo(({ rent, loan, property, investment, colors }) => 
                 {moneyFormat(Math.abs(totalPropSavings))}
               </div>
             </div>
-            <div className="row split">
-              <div>Cost To Sell @ 6%</div>
-              <div className="bold">{moneyFormat(-futureHomeValue * 0.06)}</div>
+            <div className="row split v-center">
+              <div>
+                Cost To Sell @ 10%{" "}
+                {/* <PopoverInfo
+                  contentComponent={<div>Hello</div>}
+                  title={"Hello"}
+                /> */}
+              </div>
+              <div className="bold">{moneyFormat(-futureHomeValue * 0.1)}</div>
             </div>
             <div className="row split">
               <div>Estimated Net Worth</div>
@@ -124,7 +154,7 @@ const BvrResults = React.memo(({ rent, loan, property, investment, colors }) => 
               </div>
             </div>
             <div className="row split">
-              <div>Upfront Costs</div>
+              <div>Saved Upfront Costs</div>
               <div className="bold">
                 {moneyFormat(downPay + loan.closingCosts)}
               </div>

@@ -1,0 +1,16 @@
+.popover {
+    background: $white;
+    box-shadow: 1px 1px 5px $boxshadowlight;
+    border: 1px solid lightgrey;
+    font-size: .85em;
+    min-width: 250px;
+}
+
+.popover-inner {
+    margin: 5px;
+}
+
+.popover-title {
+    font-weight: 700;
+    text-align: left;
+}

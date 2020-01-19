@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Global } from '../../contexts/global';
 import useInputStateNumber from '../../hooks/useInputStateNumber';
 import InputNumber from '../InputNumber';
+import { loanFuncs } from '../../utilities/loan';
+import { moneyFormat } from '../../utilities/helpers';
 
 const DownPayment = () => {
     const [state, dispatch] = useContext(Global);
@@ -18,8 +20,8 @@ const DownPayment = () => {
 
     return (
         <>
-            <label>Down Payment <span className='bold'>{downPaymentPer}%</span></label>
-            <input value={downPaymentPer} className='range' type='range' min='0' max="99.9" onChange={(e) => setDownPayment(e.target.value)}></input>
+            <label>Down Payment: <span className='bold'>{downPaymentPer}%</span> <span>Loan Amount:</span><span className='bold'> {moneyFormat(loanFuncs.loanAmount(loan, property.price))}</span></label>
+            <input value={downPaymentPer} className='range' type='range' min='0' max="99.9" step=".01" onChange={(e) => setDownPayment(e.target.value)}></input>
         </>
     )
 }
