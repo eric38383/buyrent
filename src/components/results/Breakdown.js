@@ -97,7 +97,7 @@ const Breakdown = ({ investments, loan, property, tableCosts, amort, colors }) =
               {moneyFormat(
                 investments[investments.length - 1] -
                   investments[0] -
-                  totalRentSavings
+                  (totalRentSavings > 0 ? totalRentSavings : 0)
               )}
             </div>
           </div>
