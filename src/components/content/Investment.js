@@ -29,12 +29,12 @@ const InvestmentContent = ({ colors }) => {
           <div className="col is-half">
             <div className="form-inner-title">Investment Objectives</div>
             <div className="form-inner-content">
-              It is normally said that an investor should have a 60/40 split
-              between stocks and bonds. A younger investor should take more risk
-              and have a larger part of his portfolio in stocks, while an older
-              investor should lean towards less risky assets.
+              Investment professionals insist that a perfectly balanced portfolio 
+              should have a 60/40 split between stocks and bonds. A younger investor 
+              should take on more risk and own more stocks, while an older
+              investor should lean towards less risky assets like bonds.
             </div>
-            <div className="form-inner-title">Average Returns:</div>
+            <div className="form-inner-title">Average Returns Since 1926:</div>
             <div className="form-inner-content">
               <div>Bonds: {investment.bondReturns.toFixed(2)}%</div>
               <div>Stocks: {investment.stockReturns}%</div>

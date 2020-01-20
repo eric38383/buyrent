@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import TotalCostsChart from './charts/TotalCosts';
-import SimpleTable from './SimpleTable';
-import InvestmentReturns from './charts/InvestmentReturns';
+import React from 'react';
 import { totalCostsTableData } from './tableData'
-import { moneyFormat } from '../utilities/helpers';
 import { calcReturns } from '../utilities/investment';
 import { loanFuncs } from '../utilities/loan';
 import { propFuncs } from '../utilities/property';
 import { rentFuncs } from '../utilities/rent';
-import { DiscreteColorLegend } from 'react-vis';
-import PopoverInfo from './PopoverInfo';
+import TotalCostsAll from './results/TotalCostsAll';
+import RentInvestmentChart from './results/RentInvestmentChart';
+import Breakdown from './results/Breakdown';
+
+
+
 
 const shouldComponentNotUpdate = ( prevProps, { rent, loan, property, investment }) => {
   return rent.hasError || loan.hasError || property.hasError || investment.hasError;
@@ -20,184 +20,37 @@ const BvrResults = React.memo(({ rent, loan, property, investment, colors }) => 
     const amort = loanFuncs.amortizationSchedule(loan, property.price);
     const totalPropCosts = propFuncs.totalCosts(property, amort, 8);
     const tableCosts = totalCostsTableData(totalRent, totalPropCosts);
-    const totalRentSavings = tableCosts[tableCosts.length - 1].prop - tableCosts[tableCosts.length - 1].rent;
-    const totalPropSavings = totalRentSavings < 0 ? Math.abs(totalRentSavings) : 0;
-    const differences = tableCosts.slice(0,-1).map(item => item.diff);
     const downPay = loanFuncs.downPayment(loan, property.price);
+    const differences = tableCosts.slice(0,-1).map(item => item.diff);
     const investments = calcReturns(differences, loan.closingCosts, downPay, investment.averageReturn());
-    const futureHomeValue = propFuncs.forecastedPrice(property, 8);
-    const principalPaid = loanFuncs.loanAmount(loan, property.price) - amort[8 * 12].balance;
-    const appreciation = futureHomeValue - property.price;
-    const homeEquity = principalPaid + appreciation + downPay; 
-    const costToSell = (-futureHomeValue * .10);
-    const netWorthProp = costToSell + homeEquity + totalPropSavings;
-    const netWorthRent = investments[investments.length - 1];
-    const netWorthDiff = netWorthRent - netWorthProp;
   
-    const dataFormatter = (obj) =>{
-        if(obj.year === 'Total') {
-            return {
-                'year': <span className='bold'>{obj.year}</span>,
-                'rent': <span className='bold'>{moneyFormat(obj.rent)}</span>,
-                'prop': <span className='bold'>{moneyFormat(obj.prop)}</span>,
-                'diff': <span className='bold'>{moneyFormat(obj.diff)}</span>
-            }
-        }
-
-        return {
-            'year': obj.year === 0 ? 'Start' : obj.year,
-            'rent': moneyFormat(obj.rent),
-            'prop': moneyFormat(obj.prop),
-            'diff': moneyFormat(obj.diff)
-        }
-    }
-
     return (
       <section>
         <h2>Buy Vs. Rent</h2>
-        <div className="row">
-          <div className="bvr-totalcosts">
-            <TotalCostsChart
-              rentCosts={totalRent}
-              propertyCosts={totalPropCosts}
-              colors={colors}
-            />
-            <div className="center">
-              <DiscreteColorLegend
-                colors={colors}
-                items={[
-                  { title: "Rent", strokeWidth: 4 },
-                  { title: "Buy", strokeWidth: 4 }
-                ]}
-                orientation="horizontal"
-              />
-            </div>
-          </div>
-          <div className="bvr-totalcoststable">
-            <SimpleTable
-              headers={["Year", "Total Buy", "Total Rent", "Difference"]}
-              data={tableCosts}
-              dataFormatter={dataFormatter}
-              keys={["year", "prop", "rent", "diff"]}
-            />
-          </div>
-        </div>
+          <TotalCostsAll 
+            totalRent={totalRent}
+            totalPropCosts={totalPropCosts}
+            colors={colors}
+            tableCosts={tableCosts}
+          />
         <div className="row">
           <h4>Investment of Upfront Costs and Rental Savings</h4>
         </div>
-        <div className="row">
-          <div className="col" style={{ height: "300px", width: "100%" }}>
-            <InvestmentReturns data={investments} colors={colors} />
-          </div>
-        </div>
+        <RentInvestmentChart 
+          investments={investments}
+          colors={colors}
+        />
         <div className="row">
           <h4>Breakdown</h4>
         </div>
-        <div className="row is-small">
-          <div className="col is-half">
-            <div className="row bold">
-              <div>
-                <u>Property</u>
-              </div>
-            </div>
-            <div className="row split v-center">
-              <div>
-                Estimated Home Equity{" "}
-                <PopoverInfo
-                  contentComponent={(
-                  <>
-                    <div className='row split'>
-                      <div>Down Payment</div>
-                      <div>{moneyFormat(downPay)}</div>
-                    </div>
-                    <div className='row split'>
-                      <div>Principal Paid After</div>
-                      <div>{moneyFormat(principalPaid)}</div>
-                    </div>
-                    <div className='row split'>
-                      <div>Home Appreciation</div>
-                      <div>{moneyFormat(appreciation)}</div>
-                    </div>
-                  </>
-                  )}
-                  title={"Home Equity Breakdown at Year 8"}
-                />
-                
-              </div>
-              <div className="bold">{moneyFormat(homeEquity)}</div>
-            </div>
-            <div className="row split">
-              <div>Buy Savings</div>
-              <div className="bold">
-                {moneyFormat(Math.abs(totalPropSavings))}
-              </div>
-            </div>
-            <div className="row split v-center">
-              <div>
-                Cost To Sell @ 10%{" "}
-                {/* <PopoverInfo
-                  contentComponent={<div>Hello</div>}
-                  title={"Hello"}
-                /> */}
-              </div>
-              <div className="bold">{moneyFormat(-futureHomeValue * 0.1)}</div>
-            </div>
-            <div className="row split">
-              <div>Estimated Net Worth</div>
-              <div className="bold">{moneyFormat(netWorthProp)}</div>
-            </div>
-          </div>
-          <div className="col is-half">
-            <div className="row bold">
-              <div>
-                <u>Rent</u>
-              </div>
-            </div>
-            <div className="row split">
-              <div>Saved Upfront Costs</div>
-              <div className="bold">
-                {moneyFormat(downPay + loan.closingCosts)}
-              </div>
-            </div>
-            <div className="row split">
-              <div>Rental Savings</div>
-              <div className="bold">
-                {moneyFormat(totalRentSavings > 0 ? totalRentSavings : 0)}
-              </div>
-            </div>
-            <div className="row split">
-              <div>Investment Gain</div>
-              <div className="bold">
-                {moneyFormat(
-                  investments[investments.length - 1] -
-                    investments[0] -
-                    totalRentSavings
-                )}
-              </div>
-            </div>
-            <div className="row split">
-              <div>Estimated Net Worth</div>
-              <div className="bold">
-                {moneyFormat(investments[investments.length - 1])}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <h4>The Bottom Line</h4>
-        </div>
-        <div className="row">
-          <div className="col bottom-line">
-            After 8 years, Your Net Worth will increase by{" "}
-            <span
-              className="bold"
-              style={{ color: colors[0], fontSize: "1.3em" }}
-            >
-              {moneyFormat(Math.abs(netWorthDiff))}
-            </span>{" "}
-            more if you {netWorthDiff > 0 ? "rent" : "purchase"} a home.
-          </div>
-        </div>
+        <Breakdown 
+          loan={loan}
+          property={property}
+          investments={investments}
+          tableCosts={tableCosts}
+          amort={amort}
+          colors={colors}
+        />
       </section>
     );
 }, shouldComponentNotUpdate)

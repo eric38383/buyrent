@@ -17,8 +17,8 @@ const Rent = () => {
           </div>
           <div className="form-inner-title">Average Rent Increase</div>
           <div className="form-inner-content">
-            Since 1984, Rent experience an average increase of about <strong>3.3% </strong> 
-            a year. This is will included when making our calculations.
+            Since 1984, Rent experienced an average increase of about <strong>3.3% </strong> 
+            a year. This is will included when making the calculations.
           </div>
         </div>
       </div>

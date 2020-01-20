@@ -21,7 +21,7 @@ const DownPayment = () => {
     return (
         <>
             <label>Down Payment: <span className='bold'>{downPaymentPer}%</span> <span>Loan Amount:</span><span className='bold'> {moneyFormat(loanFuncs.loanAmount(loan, property.price))}</span></label>
-            <input value={downPaymentPer} className='range' type='range' min='0' max="99.9" step=".01" onChange={(e) => setDownPayment(e.target.value)}></input>
+            <input value={downPaymentPer} className='range' type='range' min='0' max="99.9" onChange={(e) => setDownPayment(e.target.value)}></input>
         </>
     )
 }
@@ -62,6 +62,7 @@ const LoanForm = () => {
           <option value={20}>20 yrs</option>
           <option value={25}>25 yrs</option>
           <option value={30}>30 yrs</option>
+          <option value={40}>40 yrs</option>
         </select>
         {termError ? <div className="form-error">{termError}</div> : null}
         <InputNumber 

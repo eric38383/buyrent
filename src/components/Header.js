@@ -19,9 +19,10 @@ const Header = () => {
             to repairs. Your down payment and closings costs can no longer be
             invested in higher returning assets such as stocks. And do you know
             loan amortization works? Well, most of your principal is not paid
-            until the final 10 years of your loan, which mean when you go to sell
+            until the final 10 years of your loan, which means when you go to sell
             your home in 8 years, which is the average homeownership duration,
-            you will not have built up enough equity to increase your Net Worth.
+            you will not have built up enough equity to increase your Net Worth
+            as much as renting.
           </p>
           <p>
             This tool will help you understand the true costs of buying a home,

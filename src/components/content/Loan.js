@@ -19,11 +19,11 @@ const LoanContent = () => {
           </div>
           <div className="form-inner-title">Term</div>
           <div className="form-inner-content">
-            Most loan terms vary in length from 10 to 30 years. The longer the term,
+            Most loan terms vary in length from 10 to 40 years. The longer the term,
             the more interest you will pay on your loan but you will have a
             smaller monthly payment.
           </div>
-          <div className="form-inner-title">Currnet Mortgage Rates</div>
+          <div className="form-inner-title">Current Mortgage Rates</div>
           <div className="form-inner-content row">
             <div className="col">30 YR Fixed 3.84%</div>
             <div className="col">15 YR Fixed: 3.16%</div>
@@ -31,12 +31,11 @@ const LoanContent = () => {
           </div>
           <div className="form-inner-title">MI</div>
           <div className="form-inner-content">
-            Now even you didn't want to put down a down payment, you would still
-            incur extra costs. All lenders require buyers to purchase mortgage
+            All lenders require buyers to purchase mortgage
             insurance if the Loan-to-Value ratio is more than 80%. Often times,
-            mortgage insurance is a monthly fee and can often add up to
-            thousands of dollars. The lender will usually allow you to remove
-            mortgage when you've reached a 78% Loan-to-Value ratio.
+            mortgage insurance is a monthly fee and may add up to
+            thousands of dollars. Mortgage Insurance is no longer paid
+            when you've reached a 78% Loan-to-Value ratio.
           </div>
         </div>
       </div>
