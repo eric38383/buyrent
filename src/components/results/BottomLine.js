@@ -13,7 +13,7 @@ const BottomLine = ({ netWorthDiff, colors }) => {
             After 8 years, Your Net Worth will increase by{" "}
             <span
               className="bold"
-              style={{ color: colors[0], fontSize: "1.3em" }}
+              style={{ color: netWorthDiff > 0 ? colors[0] : colors[1], fontSize: "1.3em" }}
             >
               {moneyFormat(Math.abs(netWorthDiff))}
             </span>{" "}

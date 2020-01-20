@@ -13,7 +13,7 @@ const InvestmentReturns = ({ data , colors}) => {
   });
     return (
       <FlexibleXYPlot margin={{ left: 70 }}>
-        <VerticalBarSeries data={formatted} color={colors[1]} />
+        <VerticalBarSeries data={formatted} color={colors[0]} />
         <HorizontalGridLines />
         <XAxis tickTotal={8} title={"Year"} />
         <YAxis title={"Investments"} />
