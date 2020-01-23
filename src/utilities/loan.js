@@ -41,6 +41,7 @@ export const loanFuncs = {
                 principal: principal,
                 interest: interest,
                 balance: currentBalance,
+                mi: calcMI
             };
             amorArray.push(obj);
             if(currentBalance === 0) {
@@ -48,6 +49,28 @@ export const loanFuncs = {
             }
         }
         return amorArray;
+    },
+
+    getMIFalloff(loan, price) {
+        if(!loan.term || !loan.rate || !price || loan.moMi) {
+            return 0;
+        }
+
+        let today = new Date();
+        let totalMI = 0;
+        const amort = this.amortizationSchedule(loan, price);
+        for(let i = 0; i < amort.length; i++) {
+            const ltv = amort[i].balance / price;
+            totalMI += amort[i].mi;
+            if(ltv < .78) {
+                today.setMonth(today.getMonth() + i);
+                return {
+                    payment: i,
+                    date: today,
+                    miPaid: totalMI,
+                }
+            }
+        }
     }
 }
 

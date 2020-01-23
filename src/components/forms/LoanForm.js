@@ -21,7 +21,7 @@ const DownPayment = () => {
     return (
         <>
             <label>Down Payment: <span className='bold'>{downPaymentPer}%</span> <span>Loan Amount:</span><span className='bold'> {moneyFormat(loanFuncs.loanAmount(loan, property.price))}</span></label>
-            <input value={downPaymentPer} className='range' type='range' min='0' max="99.9" onChange={(e) => setDownPayment(e.target.value)}></input>
+            <input value={downPaymentPer} className='range' type='range' min='0' max="99.9" onChange={(e) => setDownPayment(parseInt(e.target.value))}></input>
         </>
     )
 }
@@ -29,7 +29,7 @@ const DownPayment = () => {
 
 const LoanForm = () => {
     const [state, dispatch] = useContext(Global);
-    const { loan } = state;
+    const { loan, property } = state;
     const [term, setTerm, termTouched, termError, setTermError, handleTermBlur] = useInputStateNumber(loan.term);
     const [rate, setRate, rateTouched, rateError, setRateError, handleRateBlur] = useInputStateNumber(loan.rate);
     const [closingCosts, setClosingCosts, closingCostsTouched, closingCostsError, setClosingCostsError, handleClosingBlur] = useInputStateNumber(loan.closingCosts, false);
@@ -37,6 +37,8 @@ const LoanForm = () => {
 
     useEffect(() => {
         const inputsTouched = moMITouched && closingCostsTouched
+        console.log(loan)
+        console.log(loanFuncs.getMIFalloff(loan, property.price))
         const loanObj = {
             term: term,
             rate: rate,
