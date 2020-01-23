@@ -64,3 +64,25 @@ export const commaSeparateNumber = (val) => {
 export const moneyFormat = (val) => {
     return '$' + commaSeparateNumber(Math.round(val));
 }
+
+/**
+ * @function
+ * @param {int} index - index of an array on monthnames
+ * @returns {str} name of the month
+ */
+export const monthname = (index) => {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return months[index];
+} 
+
+/**
+ * @function
+ * @param {obj} date - JS Date Object
+ * @returns {string} - return formatted date
+ */
+export const formatDate = (date) => {
+    var day = date.getDate();
+    var mon = monthname(date.getMonth());
+    var yr = date.getFullYear();
+    return `${mon} ${day}, ${yr}`; 
+}

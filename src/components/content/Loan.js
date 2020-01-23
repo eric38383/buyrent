@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Global } from '../../contexts/global';
+import { loanFuncs } from '../../utilities/loan';
+import { formatDate, commaSeparateNumber} from '../../utilities/helpers';
 import LoanForm from '../forms/LoanForm';
 
 
 const LoanContent = () => {
+  const [state, dispatch] = useContext(Global);
+  const { loan, property } = state;
+  const miStats = loanFuncs.getMIFalloff(loan, property.price)
     return (
       <div className="row form-section">
         <div className="form-inner">
@@ -27,9 +33,9 @@ const LoanContent = () => {
           <div className="form-inner-content row">
             <div className="col">30 YR Fixed 3.84%</div>
             <div className="col">15 YR Fixed: 3.16%</div>
-            <div className="col">5/1 ARM: 3.6%</div>
+            <div className="col">5/1 ARM: 3.60%</div>
           </div>
-          <div className="form-inner-title">MI</div>
+          <div className="form-inner-title">Mortgage Insurance</div>
           <div className="form-inner-content">
             All lenders require buyers to purchase mortgage
             insurance if the Loan-to-Value ratio is more than 80%. Often times,
@@ -37,6 +43,17 @@ const LoanContent = () => {
             thousands of dollars. Mortgage Insurance is no longer paid
             when you've reached a 78% Loan-to-Value ratio.
           </div>
+            {miStats.payment !== 0 ?
+            <div>
+                <div className='form-inner-title'>Mortgage Insurance Analysis</div>
+                <div className='form-inner-content'>
+                  <div>Total MI Payments: {miStats.payment}</div>
+                  <div>Date Ended: {formatDate(miStats.date)}</div>
+                  <div>Total Paid: {miStats.miPaid}</div>
+                </div>
+              </div>
+              : null
+            }
         </div>
       </div>
     );

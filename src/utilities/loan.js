@@ -53,7 +53,11 @@ export const loanFuncs = {
 
     getMIFalloff(loan, price) {
         if(!loan.term || !loan.rate || !price || loan.moMi) {
-            return 0;
+            return {
+                payment: 0,
+                date: null,
+                miPaid: 0
+            }
         }
 
         let today = new Date();
