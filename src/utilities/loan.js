@@ -1,6 +1,6 @@
 export const loanFuncs = {
     paymentsPerYear: 12,
-    downPayment: function(loan,price) {
+    downPayment: function(loan, price) {
         return price * (loan.downPaymentPer / 100)
     },
     formatRate: function (loan) {

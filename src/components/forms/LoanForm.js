@@ -21,7 +21,7 @@ const DownPayment = () => {
     return (
         <>
             <label>Down Payment: <span className='bold'>{downPaymentPer}%</span> <span>Loan Amount:</span><span className='bold'> {moneyFormat(loanFuncs.loanAmount(loan, property.price))}</span></label>
-            <input value={downPaymentPer} className='range' type='range' min='0' max="99.9" onChange={(e) => setDownPayment(e.target.value)}></input>
+            <input value={loan.downPaymentPer} className='range' type='range' min='0' max="99.9" onChange={(e) => setDownPayment(e.target.value)}></input>
         </>
     )
 }
@@ -55,7 +55,7 @@ const LoanForm = () => {
           className="select"
           onChange={e => setTerm(e.target.value)}
           onBlur={e => handleTermBlur()}
-          value={term}
+          value={loan.term}
         >
           <option value={10}>10 yrs</option>
           <option value={15}>15 yrs</option>
@@ -70,21 +70,21 @@ const LoanForm = () => {
             error={rateError}
             handleChange={setRate}
             handleBlur={handleRateBlur}
-            value={rate}
+            value={loan.rate}
         />
         <InputNumber 
             label='Closing Costs'
             error={closingCostsError}
             handleChange={setClosingCosts}
             handleBlur={handleClosingBlur}
-            value={closingCosts}
+            value={loan.closingCosts}
         />
         <InputNumber 
             label='Monthly Mortgage Insurance'
             error={moMIError}
             handleChange={setMoMI}
             handleBlur={handleMIBlur}
-            value={moMI}
+            value={loan.moMI}
         />
       </>
     );
