@@ -28,11 +28,12 @@ export const loanFuncs = {
         const monthlyRate = (loan.rate / 100) / this.paymentsPerYear;
         const monthlyPayment = this.calculateMonthlyPayment(loan, price);
         const amorArray = [];
+        const ltv = this.LTV(loan, price)
         let currentBalance = amount;
     
         for (var i = 0; i < totalMonths; i++) {
             const interest = currentBalance * monthlyRate;
-            const calcMI = currentBalance / amount < .78 ? 0 : loan.moMI
+            const calcMI = currentBalance / price < .78 || ltv <= .80 ? 0 : loan.moMI
             let principal = monthlyPayment - interest;
             principal = currentBalance < principal ? currentBalance : principal;
             currentBalance = currentBalance - principal;
@@ -48,6 +49,7 @@ export const loanFuncs = {
                 return amorArray;
             }
         }
+        console.log(amorArray)
         return amorArray;
     },
 
