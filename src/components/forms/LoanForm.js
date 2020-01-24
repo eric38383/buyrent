@@ -34,7 +34,7 @@ const LoanForm = () => {
     const [rate, setRate, rateTouched, rateError, setRateError, handleRateBlur] = useInputStateNumber(loan.rate);
     const [closingCosts, setClosingCosts, closingCostsTouched, closingCostsError, setClosingCostsError, handleClosingBlur] = useInputStateNumber(loan.closingCosts, false);
     const [moMI, setMoMI, moMITouched, moMIError, setMoMIError, handleMIBlur] = useInputStateNumber(loan.moMI, false);
-
+    
     useEffect(() => {
         const inputsTouched = moMITouched && closingCostsTouched
         const loanObj = {

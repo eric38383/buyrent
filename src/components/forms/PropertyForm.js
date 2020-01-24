@@ -43,11 +43,15 @@ const PropertyForm = () => {
         downPayPer: 10,
         term: 30,
         rate: 3.84,
-        closingCosts: Math.round(loanFuncs.estimatedClosingCosts(loan, property.price)),
+        closingCosts: Math.round(
+          loanFuncs.estimatedClosingCosts(loan, property.price)
+        ),
         moMI: Math.round(loanFuncs.estimatedMoMI(loan, property.price))
-      }
+      };
       dispatch({ type: "SET_LOAN_FIELD", payload: loanObj });
     }
+
+
     return (
       <>
           <InputNumber 
@@ -55,35 +59,35 @@ const PropertyForm = () => {
             error={priceError}
             handleChange={setPrice}
             handleBlur={handlePriceBlur}
-            value={property.price}
+            value={price}
         />
           <InputNumber 
             label={"Property Tax Rate"}
             error={propTaxRateError}
             handleChange={setPropTaxRate}
             handleBlur={handlePropTaxBlur}
-            value={property.propTaxRate}
+            value={propTaxRate}
         />
           <InputNumber 
             label={"Monthly Home Insurance"}
             error={moHomeInsurError}
             handleChange={setMoHomeInsur}
             handleBlur={handleMoHomeInsurBlur}
-            value={property.moHomeInsur}
+            value={moHomeInsur}
         />
           <InputNumber 
             label={"Monthly Association Fee"}
             error={moAssocFeeError}
             handleChange={setMoAssocFee}
             handleBlur={handleMoAssocFeeBlur}
-            value={property.moAssocFee}
+            value={moAssocFee}
         />
           <InputNumber 
             label={"Monthly Maintenance & Repairs"}
             error={moMaintenanceError}
             handleChange={setMoMaintenanceFee}
             handleBlur={handleMoMaintenanceBlur}
-            value={property.moMaintenance}
+            value={moMaintenance}
         />
       </>
     );
