@@ -14,7 +14,7 @@ export const loanFuncs = {
         return price * ((100 - loan.downPaymentPer) / 100)
     },
     LTV: function (loan, price) {
-        return (this.loanAmount(loan) / price);
+        return (this.loanAmount(loan, price) / price);
     },
     calculateMonthlyPayment: function (loan, price) {
         const amount = this.loanAmount(loan, price);
@@ -52,14 +52,19 @@ export const loanFuncs = {
     },
 
     getMIFalloff(loan, price) {
-        if(!loan.term || !loan.rate || !price || loan.moMi) {
+        if(
+            !loan.term || 
+            !loan.rate || 
+            !loan.moMI || 
+            !price || 
+            this.LTV(loan, price) < 0.8
+        ) {
             return {
                 payment: 0,
                 date: null,
                 miPaid: 0
             }
         }
-
         let today = new Date();
         let totalMI = 0;
         const amort = this.amortizationSchedule(loan, price);

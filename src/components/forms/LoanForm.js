@@ -37,8 +37,6 @@ const LoanForm = () => {
 
     useEffect(() => {
         const inputsTouched = moMITouched && closingCostsTouched
-        console.log(loan)
-        console.log(loanFuncs.getMIFalloff(loan, property.price))
         const loanObj = {
             term: term,
             rate: rate,

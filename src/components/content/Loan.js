@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Global } from '../../contexts/global';
 import { loanFuncs } from '../../utilities/loan';
-import { formatDate, commaSeparateNumber} from '../../utilities/helpers';
+import { formatDate, moneyFormat } from '../../utilities/helpers';
 import LoanForm from '../forms/LoanForm';
 
 
@@ -9,6 +9,7 @@ const LoanContent = () => {
   const [state, dispatch] = useContext(Global);
   const { loan, property } = state;
   const miStats = loanFuncs.getMIFalloff(loan, property.price)
+  
     return (
       <div className="row form-section">
         <div className="form-inner">
@@ -43,13 +44,13 @@ const LoanContent = () => {
             thousands of dollars. Mortgage Insurance is no longer paid
             when you've reached a 78% Loan-to-Value ratio.
           </div>
-            {miStats.payment !== 0 ?
+            {miStats.miPaid !== 0 ?
             <div>
                 <div className='form-inner-title'>Mortgage Insurance Analysis</div>
                 <div className='form-inner-content'>
-                  <div>Total MI Payments: {miStats.payment}</div>
+                  <div>Mortgage Insurance Payments: {miStats.payment}</div>
+                  <div>Mortgage Insurance Paid: {moneyFormat(miStats.miPaid)}</div>
                   <div>Date Ended: {formatDate(miStats.date)}</div>
-                  <div>Total Paid: {miStats.miPaid}</div>
                 </div>
               </div>
               : null
