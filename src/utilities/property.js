@@ -2,7 +2,14 @@ import { compoundInterest, range } from './helpers';
 
 export const propFuncs = {
     avgAppreciationRate: 3.5,
-    
+
+    estimatedMoHomeInsur: function (prop) {
+        return (prop.price * 0.0046) / 12
+    },
+
+    estimatedMoMaintenance: function (prop) {
+        return (prop.price * .01)
+    },
   
     forecastedPrice: function (prop, yr) {
         return compoundInterest(prop.price, this.avgAppreciationRate, yr);

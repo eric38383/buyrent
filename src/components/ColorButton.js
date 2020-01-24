@@ -18,6 +18,7 @@ const ColorButton = ({ colors, handleClick }) => {
           cursor: "pointer",
           background: `linear-gradient(to bottom right, ${colors[0]} 50%, ${colors[1]} 50%)`
         }}
+        title={colors[2]}
         onKeyPress={handleKeyPress}
         onClick={() => handleClick(colors)}
       ></button>

@@ -6,12 +6,12 @@ import BvrResults from '../components/BvrResults';
 import ColorButton from '../components/ColorButton';
 
 const Themes =[
-    ['rgb(164, 180, 148)', 'rgb(190, 197, 173)'],
-    ['rgb(234, 90, 87)', 'rgb(248, 220, 101)'],
-    ['rgb(249, 223, 136)', 'rgb(81, 129, 182)'],
-    ['rgb(124, 167, 170)', 'rgb(215, 87, 85)'],
-    ['rgb(84, 141, 196)', 'rgb(182, 209, 222)'],
-    ['rgb(76, 95, 117)', 'rgb(193, 241, 219)']
+    ['rgb(164, 180, 148)', 'rgb(190, 197, 173)', 'Army Shades'],
+    ['rgb(234, 90, 87)', 'rgb(248, 220, 101)', 'Red & Yellow'],
+    ['rgb(249, 223, 136)', 'rgb(81, 129, 182)', 'Yellow & Blue'],
+    ['rgb(124, 167, 170)', 'rgb(215, 87, 85)', 'Teal & Red'],
+    ['rgb(84, 141, 196)', 'rgb(182, 209, 222)', 'Blue & Light Blue'],
+    ['rgb(76, 95, 117)', 'rgb(193, 241, 219)', 'Dark Blue & Agua Green']
 ]
 
 const BuyRent = () => {
@@ -72,6 +72,7 @@ const BuyRent = () => {
             <div>
               <button
                 type="button"
+                title='Show Results'
                 className="button-dark right"
                 onClick={() => handleShowCharts()}
               >

@@ -3,6 +3,34 @@ import { Global } from '../../contexts/global';
 import useInputStateNumber from '../../hooks/useInputStateNumber';
 import InputNumber from '../InputNumber';
 
+const PriceInput = () => {
+  const [state, dispatch] = useContext(Global);
+  const { property } = state;
+  const [price, setPrice, priceTouched, priceError, setPriceError, handlePriceBlur] = useInputStateNumber(property.price);
+
+  useEffect(() => {
+    const inputsTouched = priceTouched;
+    const propertyObj = {
+        price: price,
+        hasError: !inputsTouched || priceError ? true : false
+    };
+    dispatch({ type: "SET_PROP_FIELD", payload: propertyObj });
+},  [price]);
+
+
+  return (
+    <>
+      <InputNumber 
+          label={"Price"}
+          error={priceError}
+          handleChange={setPrice}
+          handleBlur={handlePriceBlur}
+          value={price}
+      />
+    </> 
+  )
+}
+
 const PropertyForm = () => {
     const [state, dispatch] = useContext(Global);
     const { property } = state;

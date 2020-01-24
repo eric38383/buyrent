@@ -8,7 +8,25 @@ export const loanFuncs = {
     },
     estimatedClosingCosts: function (loan, price) {
         const amount = this.loanAmount(loan, price)
-        return amount * 0.06;
+        return amount * 0.04;
+    },
+    estimatedMoMI: function (loan, price) {
+        const LTV = this.LTV(loan, price);
+        let mirate;
+        //These are just some rates based on 720 fico.
+        if(LTV <= .97) {
+            mirate = .0087;
+        } 
+        if(LTV <= .95) {
+            mirate = .0053;
+        } 
+        if (LTV <= .90) {
+            mirate = .0038;
+        }
+        if (LTV <= .85 && LTV > .80) {
+            mirate = .0023;
+        }
+        return (price * mirate) / 12;
     },
     loanAmount: function (loan, price) {
         return price * ((100 - loan.downPaymentPer) / 100)
