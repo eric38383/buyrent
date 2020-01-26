@@ -32,7 +32,7 @@ export const loanFuncs = {
         return price * ((100 - loan.downPaymentPer) / 100)
     },
     LTV: function (loan, price) {
-        return (this.loanAmount(loan) / price);
+        return (this.loanAmount(loan, price) / price);
     },
     calculateMonthlyPayment: function (loan, price) {
         const amount = this.loanAmount(loan, price);

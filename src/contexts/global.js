@@ -1,8 +1,10 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer } from 'react';
 import { RentReducer, PropertyReducer, LoanReducer, InvestmentReducer } from '../reducers';
 import { Rent, Property, Loan, Investment } from '../utilities';
+import useInputStateNumber from '../hooks/useInputStateNumber';
 
-const initialState = window.g = {
+
+const initialState = {
     rent: Rent(),
     property: Property(),
     loan: Loan(),
@@ -32,6 +34,21 @@ const Store = ({ children }) => {
         investment: useReducer(InvestmentReducer, initialState.investment),
     })
 
+    state.formState = {
+        property: {
+            price: useInputStateNumber(initialState.property.price),
+            propTaxRate: useInputStateNumber(initialState.property.propTaxRate),
+            moHomeInsur: useInputStateNumber(initialState.property.moHomeInsur, false),
+            moAssocFee: useInputStateNumber(initialState.property.moAssocFee, false),
+            moMaintenance: useInputStateNumber(initialState.property.moMaintenance, false)
+        },
+        loan: {
+            term: useInputStateNumber(initialState.loan.term),
+            rate: useInputStateNumber(initialState.loan.rate),
+            closingCosts: useInputStateNumber(initialState.loan.moMI, false),
+            moMI: useInputStateNumber(initialState.loan.moMI, false)
+        }
+    }
     return (
         <Global.Provider value={[state, dispatch]}>
             {children}

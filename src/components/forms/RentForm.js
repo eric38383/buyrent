@@ -5,7 +5,7 @@ import InputNumber from '../InputNumber';
 
 const RentForm = () => {
     const [state, dispatch] = useContext(Global);
-    const [monthlyRent, setRent, rentTouched, rentError, setRentError, handleRentBlur] = useInputStateNumber(state.rent.monthlyRent);
+    const [monthlyRent, setRent, rentTouched, setRentTouched, rentError, setRentError, handleRentBlur] = useInputStateNumber(state.rent.monthlyRent);
 
 
     useEffect(() => {

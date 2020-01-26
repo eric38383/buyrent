@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Global } from '../../contexts/global';
-import useInputStateNumber from '../../hooks/useInputStateNumber';
 import InputNumber from '../InputNumber';
 import { loanFuncs } from '../../utilities/loan';
 import { moneyFormat } from '../../utilities/helpers';
@@ -29,24 +28,23 @@ const DownPayment = () => {
 
 const LoanForm = () => {
     const [state, dispatch] = useContext(Global);
-    const { loan } = state;
-    const [term, setTerm, termTouched, termError, setTermError, handleTermBlur] = useInputStateNumber(loan.term);
-    const [rate, setRate, rateTouched, rateError, setRateError, handleRateBlur] = useInputStateNumber(loan.rate);
-    const [closingCosts, setClosingCosts, closingCostsTouched, closingCostsError, setClosingCostsError, handleClosingBlur] = useInputStateNumber(loan.closingCosts, false);
-    const [moMI, setMoMI, moMITouched, moMIError, setMoMIError, handleMIBlur] = useInputStateNumber(loan.moMI, false);
+    const { rate, term, closingCosts, moMI } = state.formState.loan;
+    const [inputRate, setRate, rateTouched, setRateTouched, rateError, setRateError, handleRateBlur] = rate;
+    const [inputTerm, setTerm, termTouched, setTermTouched, termError, setTermError, handleTermBlur] = term;
+    const [inputClosingCosts, setClosingCosts, closingCostsTouched, setClosingCostsTouched, closingCostsError, setClosingCostsError, handleClosingBlur] = closingCosts;
+    const [inputMoMI, setMoMI, moMITouched, setMITouched, moMIError, setMoMIError, handleMIBlur] = moMI;
     
     useEffect(() => {
         const inputsTouched = moMITouched && closingCostsTouched
         const loanObj = {
-            term: term,
-            rate: rate,
-            closingCosts: closingCosts,
-            moMI: moMI,
+            term: inputTerm,
+            closingCosts: inputClosingCosts,
+            moMI: inputMoMI,
             hasError: !inputsTouched || (termError + rateError + closingCostsError + moMIError) ? true : false
         };
         dispatch({ type: "SET_LOAN_FIELD", payload: loanObj });
-    },  [term, rate, closingCosts, moMI]);
-
+    },  [inputRate, inputTerm, inputClosingCosts, inputMoMI]);
+   
     return (
       <>
         <DownPayment />
@@ -55,7 +53,7 @@ const LoanForm = () => {
           className="select"
           onChange={e => setTerm(e.target.value)}
           onBlur={e => handleTermBlur()}
-          value={loan.term}
+          value={inputTerm}
         >
           <option value={10}>10 yrs</option>
           <option value={15}>15 yrs</option>
@@ -70,21 +68,21 @@ const LoanForm = () => {
             error={rateError}
             handleChange={setRate}
             handleBlur={handleRateBlur}
-            value={loan.rate}
+            value={inputRate}
         />
         <InputNumber 
             label='Closing Costs'
             error={closingCostsError}
             handleChange={setClosingCosts}
             handleBlur={handleClosingBlur}
-            value={loan.closingCosts}
+            value={inputClosingCosts}
         />
         <InputNumber 
             label='Monthly Mortgage Insurance'
             error={moMIError}
             handleChange={setMoMI}
             handleBlur={handleMIBlur}
-            value={loan.moMI}
+            value={inputMoMI}
         />
       </>
     );

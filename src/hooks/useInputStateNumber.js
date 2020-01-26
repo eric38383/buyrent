@@ -39,7 +39,7 @@ function useInputStateNumber(initialValue='', requireZero=true) {
         }
     }
 
-    return [number, numberValidate, touched, error, setError, handleBlur];
+    return [number, numberValidate, touched, setTouched, error, setError, handleBlur];
 }
 
 export default useInputStateNumber;

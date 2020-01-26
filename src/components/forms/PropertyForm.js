@@ -1,54 +1,50 @@
 import React, { useContext, useEffect } from 'react';
 import { Global } from '../../contexts/global';
-import useInputStateNumber from '../../hooks/useInputStateNumber';
 import { loanFuncs } from '../../utilities/loan';
 import { propFuncs } from '../../utilities/property';
 import InputNumber from '../InputNumber';
 import Funnel from '../../svg/Funnel';
 
+
 const PropertyForm = () => {
     const [state, dispatch] = useContext(Global);
-    const { property, loan } = state;
-    const [price, setPrice, priceTouched, priceError, setPriceError, handlePriceBlur] = useInputStateNumber(property.price);
-    const [propTaxRate, setPropTaxRate, propTaxRateTouched, propTaxRateError, setPropTaxError, handlePropTaxBlur] = useInputStateNumber(property.propTaxRate);
-    const [moHomeInsur, setMoHomeInsur, moHomeInsurTouched, moHomeInsurError, setMoHomeInsurError, handleMoHomeInsurBlur] = useInputStateNumber(property.moHomeInsur);
-    const [moAssocFee, setMoAssocFee, moAssocFeeTouched, moAssocFeeError, setMoAssocFeeError, handleMoAssocFeeBlur] = useInputStateNumber(property.moAssocFee, false);
-    const [moMaintenance, setMoMaintenanceFee, moMaintenanceTouched, moMaintenanceError, setMoMaintenanceError, handleMoMaintenanceBlur] = useInputStateNumber(property.moMaintenance, false);
+    const { price, propTaxRate, moHomeInsur, moAssocFee, moMaintenance } = state.formState.property;
+    const [inputPrice, setPrice, priceTouched, setPriceTouched, priceError, setPriceError, handlePriceBlur] = price;
+    const [inputPropTaxRate, setPropTaxRate, propTaxRateTouched, setPropTaxRateTouched, propTaxRateError, setPropTaxError, handlePropTaxBlur] = propTaxRate;
+    const [inputMoHomeInsur, setMoHomeInsur, moHomeInsurTouched, setMoHomeInsurTouched, moHomeInsurError, setMoHomeInsurError, handleMoHomeInsurBlur] = moHomeInsur;
+    const [inputMoAssocFee, setMoAssocFee, moAssocFeeTouched, setMoAssocFeeTouched, moAssocFeeError, setMoAssocFeeError, handleMoAssocFeeBlur] = moAssocFee;
+    const [inputMoMaintenance, setMoMaintenanceFee, moMaintenanceTouched, setMoMaintenanceTouched, moMaintenanceError, setMoMaintenanceError, handleMoMaintenanceBlur] = moMaintenance;
 
     useEffect(() => {
         const inputsTouched = priceTouched && propTaxRateTouched && moHomeInsurTouched && moAssocFeeTouched && moMaintenanceTouched;
         const propertyObj = {
-            price: price,
-            propTaxRate: propTaxRate,
-            moAssocFee: moAssocFee,
-            moHomeInsur: moHomeInsur,
-            moMaintenance: moMaintenance,
+            price: inputPrice,
+            propTaxRate: inputPropTaxRate,
+            moAssocFee: inputMoAssocFee,
+            moHomeInsur: inputMoHomeInsur,
+            moMaintenance: inputMoMaintenance,
             hasError: !inputsTouched || (priceError + propTaxRateError + moHomeInsurError + moAssocFeeError + moMaintenanceError) ? true : false
         };
         dispatch({ type: "SET_PROP_FIELD", payload: propertyObj });
-    },  [price, propTaxRate, moHomeInsur, moAssocFee, moMaintenance]);
+    },  [inputPrice, inputPropTaxRate, inputMoHomeInsur, inputMoAssocFee, inputMoMaintenance]);
 
     const estimateCosts = (e) => {
-      if(!price) {
+      if(!inputPrice) {
         setPriceError('Price Is Required To Estimate Costs');
         return false;
       }
-
+      const { loan, property } = state;
+      const { closingCosts, moMI } = state.formState.loan;
+      const setClosingCosts = closingCosts[1];
+      const setMoMI = moMI[1];
+      const touchedOnes = [setPropTaxRateTouched, setMoAssocFeeTouched, setMoHomeInsurTouched, setMoMaintenanceTouched, closingCosts[3], moMI[3]];
+      touchedOnes.forEach(func => func(true));
       setPropTaxRate(1.35);
       setMoHomeInsur(Math.round(propFuncs.estimatedMoHomeInsur(property)));
       setMoAssocFee(0);
-      setMoMaintenanceFee(Math.round(propFuncs.estimatedMoMaintenance(property)))
-    
-      const loanObj = {
-        downPayPer: 10,
-        term: 30,
-        rate: 3.84,
-        closingCosts: Math.round(
-          loanFuncs.estimatedClosingCosts(loan, property.price)
-        ),
-        moMI: Math.round(loanFuncs.estimatedMoMI(loan, property.price))
-      };
-      dispatch({ type: "SET_LOAN_FIELD", payload: loanObj });
+      setMoMaintenanceFee(Math.round(propFuncs.estimatedMoMaintenance(property)));
+      setClosingCosts(Math.round(loanFuncs.estimatedClosingCosts(loan, property.price)));
+      setMoMI(Math.round(loanFuncs.estimatedMoMI(loan, property.price)))
     }
 
 
@@ -59,35 +55,35 @@ const PropertyForm = () => {
             error={priceError}
             handleChange={setPrice}
             handleBlur={handlePriceBlur}
-            value={price}
+            value={inputPrice}
         />
           <InputNumber 
             label={"Property Tax Rate"}
             error={propTaxRateError}
             handleChange={setPropTaxRate}
             handleBlur={handlePropTaxBlur}
-            value={propTaxRate}
+            value={inputPropTaxRate}
         />
           <InputNumber 
             label={"Monthly Home Insurance"}
             error={moHomeInsurError}
             handleChange={setMoHomeInsur}
             handleBlur={handleMoHomeInsurBlur}
-            value={moHomeInsur}
+            value={inputMoHomeInsur}
         />
           <InputNumber 
             label={"Monthly Association Fee"}
             error={moAssocFeeError}
             handleChange={setMoAssocFee}
             handleBlur={handleMoAssocFeeBlur}
-            value={moAssocFee}
+            value={inputMoAssocFee}
         />
           <InputNumber 
             label={"Monthly Maintenance & Repairs"}
             error={moMaintenanceError}
             handleChange={setMoMaintenanceFee}
             handleBlur={handleMoMaintenanceBlur}
-            value={moMaintenance}
+            value={inputMoMaintenance}
         />
       </>
     );

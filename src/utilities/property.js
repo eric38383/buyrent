@@ -8,7 +8,7 @@ export const propFuncs = {
     },
 
     estimatedMoMaintenance: function (prop) {
-        return (prop.price * .01)
+        return (prop.price * .01) / 12;
     },
   
     forecastedPrice: function (prop, yr) {
