@@ -28,7 +28,7 @@ const PropertyContent = () => {
           </div>
           <div className="form-inner-title">Maintenance & Repairs</div>
           <div className="form-inner-content">
-            Many homeowners underestimte these costs, since when renting, they
+            Many homeowners underestimate these costs, since when renting, they
             often ignore issues that they would fix if they owned the property.
             Most experts estimate that you will spend about 1% per year 
             of your property value.
