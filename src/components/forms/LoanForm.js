@@ -20,7 +20,7 @@ const DownPayment = () => {
     return (
         <>
             <label>Down Payment: <span className='bold'>{downPaymentPer}%</span> <span>Loan Amount:</span><span className='bold'> {moneyFormat(loanFuncs.loanAmount(loan, property.price))}</span></label>
-            <input value={loan.downPaymentPer} className='range' type='range' min='0' max="99.9" onChange={(e) => setDownPayment(e.target.value)}></input>
+            <input value={downPaymentPer} className='range' type='range' min='0' max="99.9" onChange={(e) => setDownPayment(parseInt(e.target.value))}></input>
         </>
     )
 }

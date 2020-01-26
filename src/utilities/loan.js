@@ -45,12 +45,13 @@ export const loanFuncs = {
         const totalMonths = loan.term * this.paymentsPerYear;
         const monthlyRate = (loan.rate / 100) / this.paymentsPerYear;
         const monthlyPayment = this.calculateMonthlyPayment(loan, price);
+        const ltv = this.LTV(loan, price);
         const amorArray = [];
         let currentBalance = amount;
     
         for (var i = 0; i < totalMonths; i++) {
             const interest = currentBalance * monthlyRate;
-            const calcMI = currentBalance / amount < .78 ? 0 : loan.moMI
+            const calcMI = currentBalance / price < .78 || ltv <= .80 ? 0 : loan.moMI
             let principal = monthlyPayment - interest;
             principal = currentBalance < principal ? currentBalance : principal;
             currentBalance = currentBalance - principal;
@@ -59,6 +60,7 @@ export const loanFuncs = {
                 principal: principal,
                 interest: interest,
                 balance: currentBalance,
+                mi: calcMI
             };
             amorArray.push(obj);
             if(currentBalance === 0) {
@@ -66,6 +68,37 @@ export const loanFuncs = {
             }
         }
         return amorArray;
+    },
+
+    getMIFalloff(loan, price) {
+        if(
+            !loan.term || 
+            !loan.rate || 
+            !loan.moMI || 
+            !price || 
+            this.LTV(loan, price) < 0.8
+        ) {
+            return {
+                payment: 0,
+                date: null,
+                miPaid: 0
+            }
+        }
+        let today = new Date();
+        let totalMI = 0;
+        const amort = this.amortizationSchedule(loan, price);
+        for(let i = 0; i < amort.length; i++) {
+            const ltv = amort[i].balance / price;
+            totalMI += amort[i].mi;
+            if(ltv < .78) {
+                today.setMonth(today.getMonth() + i);
+                return {
+                    payment: i,
+                    date: today,
+                    miPaid: totalMI,
+                }
+            }
+        }
     }
 }
 

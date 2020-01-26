@@ -39,7 +39,7 @@ const InvestmentContent = ({ colors }) => {
               <div>Bonds: {investment.bondReturns.toFixed(2)}%</div>
               <div>Stocks: {investment.stockReturns}%</div>
               <div>
-                Your Average Rate: {investment.averageReturn().toFixed(2)}%
+                Your Average Return Rate: {investment.averageReturn().toFixed(2)}%
               </div>
             </div>
           </div>
