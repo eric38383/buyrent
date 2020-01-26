@@ -20,8 +20,7 @@ const BuyRent = () => {
   const [touched, setTouched] = useState(false);
   const [state, dispatch] = useContext(Global);
   const { rent, property, loan, investment } = state;
-  const hasError =
-    rent.hasError || loan.hasError || property.hasError || investment.hasError;
+  const hasError = rent.hasError || loan.hasError || property.hasError;
 
   const handleClick = (colors) => {
     setColors(colors);
@@ -42,7 +41,6 @@ const BuyRent = () => {
     }
     setShowCharts(true);
   };
-
 
   return (
     <div>

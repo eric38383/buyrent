@@ -12,7 +12,7 @@ import Breakdown from './results/Breakdown';
 
 
 const shouldComponentNotUpdate = ( prevProps, { rent, loan, property, investment }) => {
-  return rent.hasError || loan.hasError || property.hasError || investment.hasError;
+  return rent.hasError || loan.hasError || property.hasError;
 }
 
 const BvrResults = React.memo(({ rent, loan, property, investment, colors }) => {
@@ -23,7 +23,7 @@ const BvrResults = React.memo(({ rent, loan, property, investment, colors }) => 
     const downPay = loanFuncs.downPayment(loan, property.price);
     const differences = tableCosts.slice(0,-1).map(item => item.diff);
     const investments = calcReturns(differences, loan.closingCosts, downPay, investment.averageReturn());
-  
+    
     return (
       <section>
         <h2>Buy Vs. Rent</h2>

@@ -38,6 +38,7 @@ const LoanForm = () => {
         const inputsTouched = moMITouched && closingCostsTouched
         const loanObj = {
             term: inputTerm,
+            rate: inputRate,
             closingCosts: inputClosingCosts,
             moMI: inputMoMI,
             hasError: !inputsTouched || (termError + rateError + closingCostsError + moMIError) ? true : false

@@ -6,7 +6,6 @@ export const Investment = () =>{
         bonds: 40,
         stockReturns: 8.46,
         bondReturns: 3.40,
-        hasError: false,
         averageReturn: function () {
             return ((this.stocks / 100) * this.stockReturns) + ((this.bonds / 100) * this.bondReturns);
         }

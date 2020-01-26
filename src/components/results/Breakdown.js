@@ -28,8 +28,8 @@ const Breakdown = ({ investments, loan, property, tableCosts, amort, colors }) =
             </div>
           </div>
           <div className="row split v-center">
-            <div>
-              Estimated Home Equity{" "}
+            <div className='row'>
+              <span style={{'paddingRight': '5px'}}>Estimated Home Equity{" "}</span>
               <PopoverInfo
                 contentComponent={
                   <>
