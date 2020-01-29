@@ -30,6 +30,7 @@ const Header = () => {
           </p>
         </div>
         <div className="header-icon">
+          
           <Bags height={"300px"} width={"400px"} />
         </div>
       </header>

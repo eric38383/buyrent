@@ -12,3 +12,15 @@
         margin: 0 auto;
     }
 }
+
+.header-bags {
+    height: 250px;
+    width: 332px
+}
+
+@media (min-width: $mobile) {
+    .header-bags {
+        height: 300px;
+        width: 400px;
+    }
+}
