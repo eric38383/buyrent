@@ -23,7 +23,6 @@ const PopoverInfo = ({ contentComponent, title }) => {
                     <Info size={15} />
                 </span>
             </Popover>
-        
         </>
     )
 }

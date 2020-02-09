@@ -8,9 +8,6 @@ import TotalCostsAll from './results/TotalCostsAll';
 import RentInvestmentChart from './results/RentInvestmentChart';
 import Breakdown from './results/Breakdown';
 
-
-
-
 const shouldComponentNotUpdate = ( prevProps, { rent, loan, property, investment }) => {
   return rent.hasError || loan.hasError || property.hasError;
 }
