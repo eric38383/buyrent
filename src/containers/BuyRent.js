@@ -38,7 +38,29 @@ const BuyRent = () => {
 
     if(!touched) {
       setTouched(true);
+      fetch(`${process.env.REACT_APP_API_URL}/bvr-blueprints`, {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          rent: rent,
+          property: property,
+          loan: loan,
+          investment: investment,
+          theme: {
+            primary: colors[0],
+            secondary: colors[1]
+          }
+        })
+      })
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+      })
     }
+    
     setShowCharts(true);
   };
 

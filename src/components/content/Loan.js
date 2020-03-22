@@ -3,15 +3,14 @@ import { Global } from '../../contexts/global';
 import { loanFuncs } from '../../utilities/loan';
 import { formatDate, moneyFormat } from '../../utilities/helpers';
 import LoanForm from '../forms/LoanForm';
-import useGet from '../../hooks/useGet';
+import useAPI from '../../hooks/useAPI';
 
 
 const LoanContent = () => {
   const [state, dispatch] = useContext(Global);
-  const [data, loading, error] = useGet(`${process.env.REACT_APP_API_URL}/mortgage-rates`, [], []);
+  const [data, loading, error] = useAPI(`${process.env.REACT_APP_API_URL}/mortgage-rates`, 'get', []);
   const { loan, property } = state;
-  const miStats = loanFuncs.getMIFalloff(loan, property.price)
-
+  const miStats = loanFuncs.getMIFalloff(loan, property.price);
     return (
       <div className="row form-section">
         <div className="form-inner">
