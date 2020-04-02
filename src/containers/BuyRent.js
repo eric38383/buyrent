@@ -15,7 +15,7 @@ const Themes =[
 ]
 
 const BuyRent = () => {
-  const [colors, setColors] = useState(Themes[5]);
+  const [colors, setColors] = useState(Themes[2]);
   const [showCharts, setShowCharts] = useState(false);
   const [touched, setTouched] = useState(false);
   const [state, dispatch] = useContext(Global);
@@ -36,30 +36,30 @@ const BuyRent = () => {
       return false;
     }
 
-    if(!touched) {
-      setTouched(true);
-      fetch(`${process.env.REACT_APP_API_URL}/bvr-blueprints`, {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          rent: rent,
-          property: property,
-          loan: loan,
-          investment: investment,
-          theme: {
-            primary: colors[0],
-            secondary: colors[1]
-          }
-        })
-      })
-      .then(resp => resp.json())
-      .then(data => {
-        console.log(data)
-      })
-    }
+    // if(!touched) {
+    //   setTouched(true);
+    //   fetch(`${process.env.REACT_APP_API_URL}/bvr-blueprints`, {
+    //     method: 'post',
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       rent: rent,
+    //       property: property,
+    //       loan: loan,
+    //       investment: investment,
+    //       theme: {
+    //         primary: colors[0],
+    //         secondary: colors[1]
+    //       }
+    //     })
+    //   })
+    //   .then(resp => resp.json())
+    //   .then(data => {
+    //     console.log(data)
+    //   })
+    // }
     
     setShowCharts(true);
   };
