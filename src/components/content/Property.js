@@ -11,27 +11,26 @@ const PropertyContent = () => {
         <div className="form-inner">
           <div className="form-inner-title">Future Home Value</div>
           <div className="form-inner-content">
-            Over a long period of time, home prices have kept up well with
-            inflation. However, as your home increases in value, so do your
-            costs of ownership.
+            Over a long period of time, home prices keep up well with
+            inflation. However, as your home increases in value, so does the
+            cost of ownership.
           </div>
           <div className="form-inner-title">Property Tax Rate</div>
           <div className="form-inner-content">
             Your rate is usually subject to the city, township, county or state
-            that you're living in. While your rate may never change, if you're
-            property increases in value, you may see increased taxes.
+            that you're living in. The rate may never change, but if the
+            property increases in value, the taxes will increase also.
           </div>
           <div className="form-inner-title">Home Insurance</div>
           <div className="form-inner-content">
-            About 97% of homeowners have insurance and even if you didn't want
-            to buy it, its likely required by your lender.
+            About 97% of purchasers have home ownership. It is required by lenders.
           </div>
           <div className="form-inner-title">Maintenance & Repairs</div>
           <div className="form-inner-content">
-            Many homeowners underestimate these costs, since when renting, they
-            often ignore issues that they would fix if they owned the property.
             Most experts estimate that you will spend about 1% per year 
-            of your property value.
+            of your property value.  Potenial buyers tend to underestimate these costs, 
+            since when renting, they often ignore issues that they would otherwise 
+            fix if they owned the property.
           </div>
           <div className="form-inner-title">Total Costs</div>
           <div className="form-inner-content">

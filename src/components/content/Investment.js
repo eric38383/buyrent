@@ -29,7 +29,7 @@ const InvestmentContent = ({ colors }) => {
           <div className="col is-half">
             <div className="form-inner-title">Investment Objectives</div>
             <div className="form-inner-content">
-              Investment professionals insist that a perfectly balanced portfolio 
+              Investment professionals have said that a perfectly balanced portfolio 
               should have a 60/40 split between stocks and bonds. A younger investor 
               should take on more risk and own more stocks, while an older
               investor should lean towards less risky assets like bonds.

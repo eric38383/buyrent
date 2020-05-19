@@ -5,28 +5,15 @@ const Header = () => {
     return (
       <header>
         <div className="header-text">
-          <h2>Should I Ever Buy A Home?</h2>
+          <h2>Is Buying a Home The Best Way to Build Wealth?</h2>
           <p>
-            How many times have you heard that buying a home is the best way to
-            build wealth? A thousand times right? Lenders and realtors repeat
-            this statement constantly. What they're not telling you is that
-            there are a lot of hidden costs when it comes to buying a home.
-          </p>
-          <p>
+            The answer? It depends. Homes come with many costs.
             Property taxes, repairs, mortgage insurance and homeowners insurance
-            can really add a lot to your monthly payment. There are also other
-            hidden costs. Most homeowners underestimate how much money will go
-            to repairs. Your down payment and closings costs can no longer be
-            invested in higher returning assets such as stocks. And do you know
-            loan amortization works? Well, most of your principal is not paid
-            until the final 10 years of your loan, which means when you go to sell
-            your home in 8 years, which is the average homeownership duration,
-            you will not have built up enough equity to increase your Net Worth
-            as much as renting.
+            add a lot to your monthly payment.
           </p>
           <p>
-            This tool will help you understand the true costs of buying a home,
-            and in many cases you'll find out that it was better to rent after all.
+            This calculator will evaluate the true cost of 
+            purchasing a home and whether or not it's right for you.
           </p>
         </div>
         <div className="header-icon">

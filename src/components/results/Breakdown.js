@@ -19,7 +19,7 @@ const Breakdown = ({ investments, loan, property, tableCosts, amort, colors }) =
     const netWorthDiff = netWorthRent - netWorthProp;
 
     return (
-    <>
+      <>
         <div className="row is-small">
         <div className="col is-half">
           <div className="row bold">
@@ -115,7 +115,7 @@ const Breakdown = ({ investments, loan, property, tableCosts, amort, colors }) =
        colors={colors} 
        />
     </>
-    )
+  )
 }
 
 export default Breakdown;
