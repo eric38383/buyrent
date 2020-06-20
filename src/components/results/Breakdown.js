@@ -5,7 +5,7 @@ import { loanFuncs } from '../../utilities/loan';
 import { propFuncs } from '../../utilities/property';
 import BottomLine from './BottomLine';
 
-const Breakdown = ({ investments, loan, property, tableCosts, amort, colors }) => {
+const Breakdown = ({ investments, loan, property, tableCosts, amort, colors, costToSell }) => {
     const downPay = loanFuncs.downPayment(loan, property.price);
     const totalRentSavings = tableCosts[tableCosts.length - 1].prop - tableCosts[tableCosts.length - 1].rent;
     const totalPropSavings = totalRentSavings < 0 ? Math.abs(totalRentSavings) : 0;
@@ -13,8 +13,8 @@ const Breakdown = ({ investments, loan, property, tableCosts, amort, colors }) =
     const principalPaid = loanFuncs.loanAmount(loan, property.price) - amort[8 * 12].balance;
     const appreciation = futureHomeValue - property.price;
     const homeEquity = principalPaid + appreciation + downPay; 
-    const costToSell = (-futureHomeValue * .10);
-    const netWorthProp = costToSell + homeEquity + totalPropSavings;
+    const totalSell = (-futureHomeValue * (costToSell / 100));
+    const netWorthProp = totalSell + homeEquity + totalPropSavings;
     const netWorthRent = investments[investments.length - 1];
     const netWorthDiff = netWorthRent - netWorthProp;
 
@@ -59,12 +59,8 @@ const Breakdown = ({ investments, loan, property, tableCosts, amort, colors }) =
             </div>
           </div>
           <div className="row split v-center">
-            <div>
-              Cost To Sell @ 10%{" "}
-              {/* <PopoverInfo
-                contentComponent={<div>Hello</div>}
-                title={"Hello"}
-              /> */}
+            <div className="row">
+              <span style={{'paddingRight': '5px'}}>Cost To Sell @ {costToSell}%{" "}</span>
             </div>
             <div className="bold">{moneyFormat(-futureHomeValue * 0.1)}</div>
           </div>

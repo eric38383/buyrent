@@ -103,7 +103,7 @@ export const loanFuncs = {
 }
 
 const loanObj = {
-    rate: 3.84,
+    rate: 3.25,
     term: 30,
     downPaymentPer: 10,
     closingCosts: '',

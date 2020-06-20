@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Global } from '../contexts/global';
 import Header from '../components/Header';
-import { InvestmentContent, RentContent, PropertyContent, LoanContent } from '../components/content';
+import { InvestmentContent, RentContent, PropertyContent, LoanContent, CostToSellContent } from '../components/content';
 import BvrResults from '../components/BvrResults';
 import ColorButton from '../components/ColorButton';
 
@@ -19,8 +19,8 @@ const BuyRent = () => {
   const [showCharts, setShowCharts] = useState(false);
   const [touched, setTouched] = useState(false);
   const [state, dispatch] = useContext(Global);
-  const { rent, property, loan, investment } = state;
-  const hasError = rent.hasError || loan.hasError || property.hasError;
+  const { rent, property, loan, investment, costToSell } = state;
+  const hasError = rent.hasError || loan.hasError || property.hasError || costToSell.hasError;
 
   const handleClick = (colors) => {
     setColors(colors);
@@ -71,6 +71,7 @@ const BuyRent = () => {
         <RentContent />
         <PropertyContent />
         <LoanContent />
+        <CostToSellContent />
         <InvestmentContent colors={colors} />
         <div className="row form-section">
           <div className="form-inner">
@@ -114,6 +115,7 @@ const BuyRent = () => {
           loan={loan}
           investment={investment}
           colors={colors}
+          costToSell={costToSell.val}
         />
       ) : null}
     </div>

@@ -32,9 +32,9 @@ const LoanContent = () => {
           </div>
           <div className="form-inner-title">Current Mortgage Rates</div>
           <div className="form-inner-content row">
-            <div className="col">30 YR Fixed 3.86%</div>
-            <div className="col">15 YR Fixed: 3.30%</div>
-            <div className="col">5/1 ARM: 3.35%</div>
+            <div className="col">30 YR Fixed 3.25%</div>
+            <div className="col">15 YR Fixed: 2.5%</div>
+            <div className="col">5/1 ARM: 2.75%</div>
             {/* <div className="col">30 YR Fixed {data[0]?.rate}%</div>
             <div className="col">15 YR Fixed: {data[1]?.rate}%</div>
             <div className="col">5/1 ARM: {data[2]?.rate}%</div> */}

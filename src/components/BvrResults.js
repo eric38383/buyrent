@@ -8,11 +8,11 @@ import TotalCostsAll from './results/TotalCostsAll';
 import RentInvestmentChart from './results/RentInvestmentChart';
 import Breakdown from './results/Breakdown';
 
-const shouldComponentNotUpdate = ( prevProps, { rent, loan, property, investment }) => {
-  return rent.hasError || loan.hasError || property.hasError;
+const shouldComponentNotUpdate = ( prevProps, { rent, loan, property, costToSell }) => {
+  return rent.hasError || loan.hasError || property.hasError || costToSell.hasError;
 }
 
-const BvrResults = React.memo(({ rent, loan, property, investment, colors }) => {
+const BvrResults = React.memo(({ rent, loan, property, investment, colors, costToSell }) => {
     const totalRent = rentFuncs.forecastedRentPerYear(rent, 8);
     const amort = loanFuncs.amortizationSchedule(loan, property.price);
     const totalPropCosts = propFuncs.totalCosts(property, amort, 8);
@@ -47,6 +47,7 @@ const BvrResults = React.memo(({ rent, loan, property, investment, colors }) => 
           tableCosts={tableCosts}
           amort={amort}
           colors={colors}
+          costToSell={costToSell}
         />
       </section>
     );

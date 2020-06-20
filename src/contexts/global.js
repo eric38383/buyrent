@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import { RentReducer, PropertyReducer, LoanReducer, InvestmentReducer } from '../reducers';
+import { RentReducer, PropertyReducer, LoanReducer, InvestmentReducer, CostToSellReducer } from '../reducers';
 import { Rent, Property, Loan, Investment } from '../utilities';
 import useInputStateNumber from '../hooks/useInputStateNumber';
 
@@ -9,6 +9,10 @@ const initialState = {
     property: Property(),
     loan: Loan(),
     investment: Investment(),
+    costToSell: {
+        val: 10,
+        hasError: false
+    }
 }
 
 const combineReducers = reducers => {
@@ -32,6 +36,7 @@ const Store = ({ children }) => {
         property: useReducer(PropertyReducer, initialState.property),
         loan: useReducer(LoanReducer, initialState.loan),
         investment: useReducer(InvestmentReducer, initialState.investment),
+        costToSell: useReducer(CostToSellReducer, initialState.costToSell)
     })
 
     state.formState = {
@@ -47,7 +52,8 @@ const Store = ({ children }) => {
             rate: useInputStateNumber(initialState.loan.rate),
             closingCosts: useInputStateNumber(initialState.loan.moMI, false),
             moMI: useInputStateNumber(initialState.loan.moMI, false)
-        }
+        },
+        costToSell: useInputStateNumber(initialState.costToSell.val)
     }
     return (
         <Global.Provider value={[state, dispatch]}>

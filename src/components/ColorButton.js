@@ -10,12 +10,8 @@ const ColorButton = ({ colors, handleClick }) => {
 
     return (
       <button
+        className='color-button'
         style={{
-          height: "20px",
-          width: "20px",
-          boxShadow: "1px 1px 5px",
-          border: "none",
-          cursor: "pointer",
           background: `linear-gradient(to bottom right, ${colors[0]} 50%, ${colors[1]} 50%)`
         }}
         title={colors[2]}
