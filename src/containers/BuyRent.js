@@ -70,8 +70,8 @@ const BuyRent = () => {
       <section>
         <RentContent />
         <PropertyContent />
-        <LoanContent />
         <CostToSellContent />
+        <LoanContent />
         <InvestmentContent colors={colors} />
         <div className="row form-section">
           <div className="form-inner">
