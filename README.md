@@ -14,7 +14,7 @@ git clone https://github.com/eric38383/buyrent.git
 Go to Directory
 
 ```shell
-cd ndr
+cd buyrent
 ```
 
 Install Dependecies
