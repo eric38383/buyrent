@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { moneyFormat } from '../../utilities/helpers';
 import PopoverInfo from '../PopoverInfo';
 import { loanFuncs } from '../../utilities/loan';
@@ -113,5 +114,16 @@ const Breakdown = ({ investments, loan, property, tableCosts, amort, colors, cos
     </>
   )
 }
+
+
+Breakdown.propTypes = {
+  investments: PropTypes.array.isRequired,
+  loan: PropTypes.object.isRequired,
+  tableCosts: PropTypes.array.isRequired,
+  amort: PropTypes.array.isRequired,
+  colors: PropTypes.array.isRequired,
+  costToSell: PropTypes.number.isRequired
+}
+
 
 export default Breakdown;

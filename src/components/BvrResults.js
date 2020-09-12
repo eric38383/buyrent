@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { totalCostsTableData } from './tableData'
 import { calcReturns } from '../utilities/investment';
 import { loanFuncs } from '../utilities/loan';
@@ -53,6 +54,13 @@ const BvrResults = React.memo(({ rent, loan, property, investment, colors, costT
     );
 }, shouldComponentNotUpdate)
 
-
+BvrResults.propTypes = {
+  rent: PropTypes.object.isRequired, 
+  loan: PropTypes.object.isRequired,
+  property: PropTypes.object.isRequired,
+  investment: PropTypes.object.isRequired,
+  colors: PropTypes.array.isRequired,
+  costToSell: PropTypes.number.isRequired
+}
 
 export default BvrResults;

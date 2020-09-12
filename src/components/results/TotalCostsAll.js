@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TotalCostsChart from '../charts/TotalCosts';
 import SimpleTable from '../SimpleTable';
 import { moneyFormat } from '../../utilities/helpers';
@@ -54,6 +55,13 @@ const TotalCostsAll = ({ totalRent, totalPropCosts, colors, tableCosts }) => {
         </div>
       </div>
     );
+}
+
+TotalCostsAll.propTypes = {
+  totalRent: PropTypes.array.isRequired,
+  totalPropCosts: PropTypes.array.isRequired,
+  colors: PropTypes.array.isRequired,
+  tableCosts: PropTypes.array.isRequired,
 }
 
 export default TotalCostsAll

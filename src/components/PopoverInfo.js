@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Popover from 'react-tiny-popover';
 import Info from '../svg/Info';
+import { Property } from '../utilities';
 
 const PopoverInfo = ({ contentComponent, title }) => {
     const [popOpen, setPopState] = useState(false);
@@ -27,6 +29,11 @@ const PopoverInfo = ({ contentComponent, title }) => {
             </Popover>
         </>
     )
+}
+
+PopoverInfo.propTypes = {
+    contentComponent: PropTypes.object.isRequired,
+    title: PropTypes.any.isRequired
 }
 
 const PopoverContentWrapper = ({ children, title }) => {

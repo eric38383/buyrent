@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import InvestmentReturns from '../charts/InvestmentReturns';
 
 const RentInvestmentChart = ({ investments, colors }) => {
@@ -12,6 +13,11 @@ const RentInvestmentChart = ({ investments, colors }) => {
             </div>
         </div>
     )
+}
+
+RentInvestmentChart.propTypes = {
+    investments: PropTypes.array.isRequired,
+    colors: PropTypes.array.isRequired
 }
 
 export default RentInvestmentChart;

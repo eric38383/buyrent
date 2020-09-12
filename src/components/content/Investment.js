@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Global } from '../../contexts/global';
 import { DiscreteColorLegend } from 'react-vis';
 import Pie from '../charts/Pie';
 import InvestmentForm from '../forms/InvestmentForm';
+import { Investment } from '../../utilities';
 
 const InvestmentContent = ({ colors }) => {  
     const [state, dispatch] = useContext(Global);
@@ -46,6 +48,10 @@ const InvestmentContent = ({ colors }) => {
         </div>
       </div>
     );
+}
+
+InvestmentContent.propTypes = {
+  colors: PropTypes.array.isRequired
 }
 
 export default InvestmentContent;

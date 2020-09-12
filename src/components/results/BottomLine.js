@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { moneyFormat } from '../../utilities/helpers';
 
 
@@ -22,6 +23,11 @@ const BottomLine = ({ netWorthDiff, colors }) => {
         </div>
       </>
     );
+}
+
+BottomLine.propTypes = {
+  netWorthDiff: PropTypes.number.isRequired,
+  colors: PropTypes.array.isRequired
 }
 
 export default BottomLine

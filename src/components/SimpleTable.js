@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SimpleTable = ({ headers, data, dataFormatter, keys }) => {
     return (
@@ -24,6 +25,13 @@ const SimpleTable = ({ headers, data, dataFormatter, keys }) => {
         </tbody>
       </table>
     );
+}
+
+SimpleTable.propTypes = {
+  headers: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
+  dataFormatter: PropTypes.func.isRequired,
+  keys: PropTypes.array.isRequired
 }
 
 

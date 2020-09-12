@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
     FlexibleXYPlot, 
     XAxis, 
@@ -57,5 +59,10 @@ const TotalCostsChart = ({ rentCosts, propertyCosts, colors }) => {
     )
 }
 
+TotalCostsChart.propTypes = {
+    rentCosts: PropTypes.array.isRequired,
+    propertyCosts: PropTypes.array.isRequired,
+    colors: PropTypes.array.isRequired
+}
 
 export default TotalCostsChart;

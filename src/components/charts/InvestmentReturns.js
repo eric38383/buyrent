@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     FlexibleXYPlot, 
     XAxis, 
@@ -7,7 +8,7 @@ import {
     VerticalBarSeries
 } from 'react-vis';
 
-const InvestmentReturns = ({ data , colors}) => {
+const InvestmentReturns = ({ data , colors }) => {
   const formatted = data.map((d, i) => {
     return {'x': i, 'y': d }
   });
@@ -19,6 +20,11 @@ const InvestmentReturns = ({ data , colors}) => {
         <YAxis title={"Investments"} />
       </FlexibleXYPlot>
     );
+}
+
+InvestmentReturns.propTypes = {
+  data: PropTypes.array.isRequired,
+  colors: PropTypes.array.isRequired
 }
 
 

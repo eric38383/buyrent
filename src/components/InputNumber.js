@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const InputNumber = ({ label, error, handleChange, handleBlur, value }) => {
     
@@ -15,6 +16,14 @@ const InputNumber = ({ label, error, handleChange, handleBlur, value }) => {
             {error ? <div className="form-error">{error}</div> : null}
         </>
     )
+}
+
+InputNumber.propTypes = {
+    label: PropTypes.any.isRequired,
+    error: PropTypes.any.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleBlur: PropTypes.func.isRequired,
+    value: PropTypes.any.isRequired
 }
 
 export default InputNumber;
