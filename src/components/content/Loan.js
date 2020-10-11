@@ -3,12 +3,10 @@ import { Global } from '../../contexts/global';
 import { loanFuncs } from '../../utilities/loan';
 import { formatDate, moneyFormat } from '../../utilities/helpers';
 import LoanForm from '../forms/LoanForm';
-import useAPI from '../../hooks/useAPI';
 
 
 const LoanContent = () => {
   const [state, dispatch] = useContext(Global);
-  //const [data, loading, error] = useAPI(`${process.env.REACT_APP_API_URL}/mortgage-rates`, 'get', []);
   const { loan, property } = state;
   const miStats = loanFuncs.getMIFalloff(loan, property.price);
     return (
@@ -35,9 +33,6 @@ const LoanContent = () => {
             <div className="col">30 YR Fixed 3.25%</div>
             <div className="col">15 YR Fixed: 2.5%</div>
             <div className="col">5/1 ARM: 2.75%</div>
-            {/* <div className="col">30 YR Fixed {data[0]?.rate}%</div>
-            <div className="col">15 YR Fixed: {data[1]?.rate}%</div>
-            <div className="col">5/1 ARM: {data[2]?.rate}%</div> */}
           </div>
           <div className="form-inner-title">Mortgage Insurance</div>
           <div className="form-inner-content">
