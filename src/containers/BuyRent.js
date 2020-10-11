@@ -7,11 +7,10 @@ import ColorButton from '../components/ColorButton';
 
 const Themes =[
     ['rgb(164, 180, 148)', 'rgb(190, 197, 173)', 'Army Shades'],
-    ['rgb(234, 90, 87)', 'rgb(248, 220, 101)', 'Red & Yellow'],
-    ['rgb(249, 223, 136)', 'rgb(81, 129, 182)', 'Yellow & Blue'],
-    ['rgb(124, 167, 170)', 'rgb(215, 87, 85)', 'Teal & Red'],
     ['rgb(84, 141, 196)', 'rgb(182, 209, 222)', 'Blue & Light Blue'],
-    ['rgb(76, 95, 117)', 'rgb(193, 241, 219)', 'Dark Blue & Agua Green']
+    ['rgb(76, 95, 117)', 'rgb(193, 241, 219)', 'Dark Blue & Agua Green'],
+    ['rgb(65, 234, 212)', 'rgb(255, 32, 10)', 'Winter Sky & Turquoise'],
+    ['rgb(153, 98, 30)', 'rgb(255, 100, 50)', 'Brown & Orange']
 ]
 
 const BuyRent = () => {
@@ -20,6 +19,7 @@ const BuyRent = () => {
   const [touched, setTouched] = useState(false);
   const [state, dispatch] = useContext(Global);
   const { rent, property, loan, investment, costToSell } = state;
+  //Has error tells us if some of the inputs are invalid or empty and we can not proceed
   const hasError = rent.hasError || loan.hasError || property.hasError || costToSell.hasError;
 
   const handleClick = (colors) => {
@@ -35,30 +35,9 @@ const BuyRent = () => {
     if(!showCharts && hasError) {
       return false;
     }
-
+    
     if(!touched) {
       setTouched(true);
-      // fetch(`${process.env.REACT_APP_API_URL}/bvr-blueprints`, {
-      //   method: 'post',
-      //   headers: {
-      //     Accept: 'application/json',
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     rent: rent,
-      //     property: property,
-      //     loan: loan,
-      //     investment: investment,
-      //     theme: {
-      //       primary: colors[0],
-      //       secondary: colors[1],
-      //     },
-      //   }),
-      // })
-      //   .then((resp) => resp.json())
-      //   .then((data) => {
-      //     console.log(data);
-      //   });
     }
     
     setShowCharts(true);

@@ -1,5 +1,3 @@
-//import investment from 
-
 const InvestmentReducer = (state, action) => {
     switch(action.type) {
         case 'SET_INVESTMENT_FIELD':

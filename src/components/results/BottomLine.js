@@ -11,7 +11,7 @@ const BottomLine = ({ netWorthDiff, colors }) => {
         </div>
         <div className="row">
           <div className="col bottom-line">
-            After 8 years, Your Net Worth will increase by{" "}
+            After 9 years, Your Net Worth will increase by{" "}
             <span
               className="bold"
               style={{ color: netWorthDiff > 0 ? colors[0] : colors[1], fontSize: "1.3em" }}

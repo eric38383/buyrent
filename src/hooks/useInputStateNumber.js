@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+// A React Hook for validating number inputs. Number inputs are annoying 
+// because an empty number input is an empty string. In some cases,
+// the number 0 s not a valid input as dividing by zero leads to errors. 
 function useInputStateNumber(initialValue='', requireZero=true) {
     let [number, setNumber] = useState(initialValue);
     let [touched, setTouched] = useState(false);

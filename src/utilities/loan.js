@@ -10,10 +10,14 @@ export const loanFuncs = {
         const amount = this.loanAmount(loan, price)
         return amount * 0.04;
     },
+    /**
+     * @param {obj} loan 
+     * @param {number} price
+     * @returns {number} - returns an estimated MI payment based on sample MI rates.
+     */
     estimatedMoMI: function (loan, price) {
         const LTV = this.LTV(loan, price);
         let mirate;
-        //These are just some rates based on 720 fico.
         if(LTV <= .97) {
             mirate = .0087;
         } 
@@ -31,15 +35,29 @@ export const loanFuncs = {
     loanAmount: function (loan, price) {
         return price * ((100 - loan.downPaymentPer) / 100)
     },
+    // stands for Loan to Value
     LTV: function (loan, price) {
         return (this.loanAmount(loan, price) / price);
     },
+    /**
+     * 
+     * @param {obj} loan 
+     * @param {number} price 
+     * @returns {number}
+     */
     calculateMonthlyPayment: function (loan, price) {
         const amount = this.loanAmount(loan, price);
         const totalMonths = loan.term * this.paymentsPerYear;
         const monthlyRate = loan.rate / 100 / this.paymentsPerYear;
         return (amount * (monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / (Math.pow(1 + monthlyRate, totalMonths) - 1)) || 0;
     },
+    /**
+     * 
+     * @param {obj} loan 
+     * @param {number} price
+     * @returns {array} - returns an array where each item is an object which has the total payment, 
+     *            pricipal paid, interest paid, balance left and MI. 
+     */
     amortizationSchedule: function (loan, price) {
         const amount = this.loanAmount(loan, price); 
         const totalMonths = loan.term * this.paymentsPerYear;
@@ -69,7 +87,12 @@ export const loanFuncs = {
         }
         return amorArray;
     },
-
+    /**
+     * 
+     * @param {obj} loan 
+     * @param {number} price 
+     * @returns object - The payment in which the MI falls off, the date and the total MI paid throughout the loan
+     */
     getMIFalloff(loan, price) {
         if(
             !loan.term || 
@@ -84,6 +107,7 @@ export const loanFuncs = {
                 miPaid: 0
             }
         }
+
         let today = new Date();
         let totalMI = 0;
         const amort = this.amortizationSchedule(loan, price);

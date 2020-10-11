@@ -1,6 +1,6 @@
 import { compoundInterest } from './helpers';
 
-export const Investment = () =>{
+export const Investment = () => {
     return {
         stocks: 60,
         bonds: 40,
@@ -12,6 +12,14 @@ export const Investment = () =>{
     }
 }
 
+/**
+ * @function
+ * @param {number} costDifferencePerYear - an array of the differences between a comparison of your rent and loan costs
+ * @param {number} closingCosts - loan closing costs
+ * @param {number} downPayment - loan down payment
+ * @param {number} blendedRate - rate to compound your saving by not buying
+ * @returns {array} - returns your total investment returns at the end of the year for every item.
+ */
 export const calcReturns = (costDifferencePerYear, closingCosts, downPayment, blendedRate) => {
     let running = closingCosts + downPayment;
     return [running].concat(costDifferencePerYear.map(item => {

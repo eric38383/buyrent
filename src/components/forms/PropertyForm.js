@@ -28,8 +28,10 @@ const PropertyForm = () => {
         dispatch({ type: "SET_PROP_FIELD", payload: propertyObj });
     },  [inputPrice, inputPropTaxRate, inputMoHomeInsur, inputMoAssocFee, inputMoMaintenance]);
 
+    // When you click the funnel button, we estimate all the inputs for the user.
     const estimateCosts = (e) => {
       if(!inputPrice) {
+        // Estimating a lot inputs off the price so don't continue until that is filled in.
         setPriceError('Price Is Required To Estimate Costs');
         return false;
       }
